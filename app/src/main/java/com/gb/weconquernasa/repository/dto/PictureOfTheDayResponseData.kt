@@ -1,10 +1,9 @@
-package com.gb.weconquernasa.repository
+package com.gb.weconquernasa.repository.dto
 
 
 import com.google.gson.annotations.SerializedName
 
 data class PictureOfTheDayResponseData(
-
     val date: String,
     val explanation: String,
     val hdurl: String,

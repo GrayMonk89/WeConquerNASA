@@ -1,14 +1,13 @@
 package com.gb.weconquernasa.view.picture
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import coil.load
-import com.gb.weconquernasa.R
 import com.gb.weconquernasa.databinding.FragmentPictureOfTheDayBinding
 import com.gb.weconquernasa.viewmodel.PictureOfTheDayAppState
 import com.gb.weconquernasa.viewmodel.PictureOfTheDayViewModel
@@ -39,10 +38,12 @@ class PictureOfTheDayFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getLiveData().observe(viewLifecycleOwner, Observer {
-            renderData(it)
+        viewModel.getLiveData().observe(viewLifecycleOwner,object : Observer<PictureOfTheDayAppState> {
+            override fun onChanged(t: PictureOfTheDayAppState) {
+                renderData(t)
+            }
         })
-        viewModel.sendRequest()
+        viewModel.getPicture()
     }
 
     private fun renderData(pictureOfTheDayAppState: PictureOfTheDayAppState){
@@ -57,7 +58,6 @@ class PictureOfTheDayFragment : Fragment() {
     }
 
     companion object {
-
         @JvmStatic
         fun newInstance() = PictureOfTheDayFragment()
     }

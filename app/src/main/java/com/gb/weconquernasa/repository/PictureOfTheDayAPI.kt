@@ -1,5 +1,6 @@
 package com.gb.weconquernasa.repository
 
+import com.gb.weconquernasa.repository.dto.PictureOfTheDayResponseData
 import com.gb.weconquernasa.utils.NASA_APOD_ENDPOINT
 import retrofit2.Call
 import retrofit2.http.GET

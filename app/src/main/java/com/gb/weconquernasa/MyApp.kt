@@ -12,13 +12,20 @@ class MyApp: Application() {
         super.onCreate()
     }
 
-    fun getRetrofit(): PictureOfTheDayAPI {
+    companion object {
 
-        val pictureOfTheDayRetrofit = Retrofit.Builder().apply {
-            baseUrl(NASA_DOMAIN_PART)
-            addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
-        }.build()
+        fun getRetrofit(): PictureOfTheDayAPI {
 
-        return pictureOfTheDayRetrofit.create(PictureOfTheDayAPI::class.java)
+            val pictureOfTheDayRetrofit = Retrofit.Builder().apply {
+                baseUrl(NASA_DOMAIN_PART)
+                addConverterFactory(
+                    GsonConverterFactory.create(
+                        GsonBuilder().setLenient().create()
+                    )
+                )
+            }.build().create(PictureOfTheDayAPI::class.java)
+
+            return pictureOfTheDayRetrofit
+        }
     }
 }

@@ -1,6 +1,6 @@
 package com.gb.weconquernasa.viewmodel
 
-import com.gb.weconquernasa.repository.PictureOfTheDayResponseData
+import com.gb.weconquernasa.repository.dto.PictureOfTheDayResponseData
 
 sealed class PictureOfTheDayAppState{
     data class Success(val pictureOfTheDayResponseData: PictureOfTheDayResponseData):PictureOfTheDayAppState()

@@ -1,49 +1,37 @@
 package com.gb.weconquernasa.viewmodel
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.gb.weconquernasa.BuildConfig
-import com.gb.weconquernasa.repository.PictureOfTheDayResponseData
-
+import com.gb.weconquernasa.repository.PictureOfTheDayRepository
 import com.gb.weconquernasa.repository.PictureOfTheDayRetrofitImpl
-import com.google.gson.internal.GsonBuildConfig
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.gb.weconquernasa.repository.dto.PictureOfTheDayResponseData
+
 
 class PictureOfTheDayViewModel(
-    private val liveData: MutableLiveData<PictureOfTheDayAppState> = MutableLiveData(),
-    private val pictureOfTheDayRetrofitImpl: PictureOfTheDayRetrofitImpl = PictureOfTheDayRetrofitImpl()
+    private val liveData: MutableLiveData<PictureOfTheDayAppState> = MutableLiveData()
 ) : ViewModel() {
-    fun getLiveData(): LiveData<PictureOfTheDayAppState> {
-        return liveData
-    }
 
-    fun sendRequest() {
-        liveData.postValue(PictureOfTheDayAppState.Loading(null))
-        pictureOfTheDayRetrofitImpl.getRetrofit().getPictureOfTheDay(BuildConfig.NASA_API_KEY)
-            .enqueue(callback)
-    }
+    private val pictureOfTheDayRepository: PictureOfTheDayRepository = PictureOfTheDayRetrofitImpl()
 
-    val callback = object : Callback<PictureOfTheDayResponseData> {
-        override fun onResponse(
-            call: Call<PictureOfTheDayResponseData>,
-            response: Response<PictureOfTheDayResponseData>
-        ) {
+    fun getLiveData() = liveData
 
-            if (response.isSuccessful) {
-                response.body()?.let {
-                    liveData.postValue(PictureOfTheDayAppState.Success(it))
-                }
-            } else {
-
+    fun getPicture(){
+        pictureOfTheDayRepository.getPictureOfTheDay(BuildConfig.NASA_API_KEY,object : Callback {
+            override fun onResponse(picture: PictureOfTheDayResponseData) {
+                liveData.postValue(PictureOfTheDayAppState.Success(picture))
             }
-        }
 
-        override fun onFailure(call: Call<PictureOfTheDayResponseData>, t: Throwable) {
-            TODO("Not yet implemented")
-        }
+            override fun onFailure(errorMessage: String) {
+                liveData.postValue(PictureOfTheDayAppState.Error(Throwable(errorMessage)))
+            }
 
+        })
+    }
+
+
+    interface Callback {
+        fun onResponse(picture: PictureOfTheDayResponseData)
+        fun onFailure(errorMessage: String)
     }
 }
