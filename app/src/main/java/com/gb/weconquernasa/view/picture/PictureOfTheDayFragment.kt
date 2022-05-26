@@ -54,7 +54,7 @@ class PictureOfTheDayFragment : Fragment() {
             is PictureOfTheDayAppState.Success -> {
                 binding.imageView.load(pictureOfTheDayAppState.pictureOfTheDayResponseData.url){
                     crossfade(true)
-                    placeholder(R.drawable.d1)
+                    placeholder(R.drawable.g2)
                 }
             }
         }
