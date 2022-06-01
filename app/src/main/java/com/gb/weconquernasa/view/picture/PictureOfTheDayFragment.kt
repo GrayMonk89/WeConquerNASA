@@ -74,6 +74,10 @@ class PictureOfTheDayFragment : Fragment() {
             R.id.actionExitAppBar -> {
                 exitProcess(0)
             }
+            android.R.id.home -> {
+                BottomNavigationDrawerFragment.newInstance()
+                    .show(requireActivity().supportFragmentManager, "")
+            }
 
         }
         return super.onOptionsItemSelected(item)
@@ -144,5 +148,6 @@ class PictureOfTheDayFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() = PictureOfTheDayFragment()
+
     }
 }
