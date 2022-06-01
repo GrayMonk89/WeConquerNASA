@@ -13,13 +13,17 @@ import coil.load
 import com.gb.weconquernasa.MainActivity
 import com.gb.weconquernasa.R
 import com.gb.weconquernasa.databinding.FragmentPictureOfTheDayBinding
-import com.gb.weconquernasa.utils.LOG_KEY
-import com.gb.weconquernasa.utils.showSnackBar
+import com.gb.weconquernasa.utils.*
 import com.gb.weconquernasa.viewmodel.PictureOfTheDayAppState
 import com.gb.weconquernasa.viewmodel.PictureOfTheDayViewModel
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 import com.google.android.material.snackbar.Snackbar
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.system.exitProcess
 
 class PictureOfTheDayFragment : Fragment() {
@@ -55,20 +59,67 @@ class PictureOfTheDayFragment : Fragment() {
         initSheetBehavior()
         initMenuAppBar()
         initFABListener()
+        initChipListener()
 
     }
 
-    private fun initFABListener(){
+    private fun initChipListener() {
+        binding.chipGroup.setOnCheckedStateChangeListener { chipGroup: ChipGroup, mutableList: MutableList<Int> ->
+            for (id in mutableList) {
+                when (id) {
+                    R.id.chipToday -> {
+                        viewModel.getPicture(makeDate(DEFAULT_VALUE_ZERO))
+                    }
+                    R.id.chipYesterday -> {
+                        viewModel.getPicture(makeDate(DEFAULT_VALUE_ONE))
+                    }
+                    R.id.chipThirdDay -> {
+                        viewModel.getPicture(makeDate(DEFAULT_VALUE_TWO))
+                    }
+                }
+            }
+        }
+
+/*        binding.chipGroup.setOnCheckedChangeListener { group, position ->
+
+            when (position) {
+                R.id.chipToday -> {
+                    viewModel.getPicture(makeDate(DEFAULT_VALUE_ZERO))
+                }
+                R.id.chipYesterday -> {
+                    viewModel.getPicture(makeDate(DEFAULT_VALUE_ONE))
+                }
+                R.id.chipThirdDay -> {
+                    viewModel.getPicture(makeDate(DEFAULT_VALUE_TWO))
+                }
+            }
+        }*/
+    }
+
+    private fun initFABListener() {
         binding.fab.setOnClickListener {
-            if(isMain){
+            if (isMain) {
                 binding.bottomAppBar.navigationIcon = null
                 binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
-                binding.fab.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.ic_back_fab))
+                binding.fab.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        R.drawable.ic_back_fab
+                    )
+                )
                 binding.bottomAppBar.replaceMenu(R.menu.menu_empty)
             } else {
-                binding.bottomAppBar.navigationIcon = (ContextCompat.getDrawable(requireContext(),R.drawable.ic_hamburger_menu_bottom_bar))
+                binding.bottomAppBar.navigationIcon = (ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.ic_hamburger_menu_bottom_bar
+                ))
                 binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
-                binding.fab.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.ic_plus_fab))
+                binding.fab.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        R.drawable.ic_plus_fab
+                    )
+                )
                 binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)
             }
             isMain = !isMain
@@ -88,10 +139,10 @@ class PictureOfTheDayFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.actionFavouriteAppBar -> {
-                view?.showSnackBar(item.title.toString(),"",{},Snackbar.LENGTH_SHORT)
+                view?.showSnackBar(item.title.toString(), "", {}, Snackbar.LENGTH_SHORT)
             }
             R.id.actionSettingsAppBar -> {
-                view?.showSnackBar(item.title.toString(),"",{},Snackbar.LENGTH_SHORT)
+                view?.showSnackBar(item.title.toString(), "", {}, Snackbar.LENGTH_SHORT)
             }
             R.id.actionExitAppBar -> {
                 exitProcess(0)
@@ -138,7 +189,7 @@ class PictureOfTheDayFragment : Fragment() {
                     renderData(appState)
                 }
             })
-        viewModel.getPicture()
+        viewModel.getPicture(makeDate(DEFAULT_VALUE_ZERO))
     }
 
     private fun initEndIconListener() {
@@ -148,6 +199,13 @@ class PictureOfTheDayFragment : Fragment() {
                     Uri.parse("https://en.wikipedia.org/wiki/${binding.inputEditText.text.toString()}")
             })
         }
+    }
+
+    private fun makeDate(minus: Int): String {
+        val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
+        val cal = Calendar.getInstance()
+        cal.add(Calendar.DATE, -minus)
+        return dateFormat.format(cal.time)
     }
 
     private fun renderData(pictureOfTheDayAppState: PictureOfTheDayAppState) {

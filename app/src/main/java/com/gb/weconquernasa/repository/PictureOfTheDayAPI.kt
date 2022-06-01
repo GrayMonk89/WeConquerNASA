@@ -8,5 +8,8 @@ import retrofit2.http.Query
 
 interface PictureOfTheDayAPI {
     @GET(NASA_APOD_ENDPOINT)
-    fun getPictureOfTheDay(@Query("api_key") apyKey: String) : Call<PictureOfTheDayResponseData>
+    fun getPictureOfTheDay(
+        @Query("api_key") apyKey: String,
+        @Query("date") date: String
+    ): Call<PictureOfTheDayResponseData>
 }

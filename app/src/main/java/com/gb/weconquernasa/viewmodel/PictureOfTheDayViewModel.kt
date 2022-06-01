@@ -16,17 +16,20 @@ class PictureOfTheDayViewModel(
 
     fun getLiveData() = liveData
 
-    fun getPicture(){
-        pictureOfTheDayRepository.getPictureOfTheDay(BuildConfig.NASA_API_KEY,object : Callback {
-            override fun onResponse(picture: PictureOfTheDayResponseData) {
-                liveData.postValue(PictureOfTheDayAppState.Success(picture))
-            }
+    fun getPicture(date: String) {
+        pictureOfTheDayRepository.getPictureOfTheDay(
+            BuildConfig.NASA_API_KEY,
+            date,
+            object : Callback {
+                override fun onResponse(picture: PictureOfTheDayResponseData) {
+                    liveData.postValue(PictureOfTheDayAppState.Success(picture))
+                }
 
-            override fun onFailure(errorMessage: String) {
-                liveData.postValue(PictureOfTheDayAppState.Error(Throwable(errorMessage)))
-            }
+                override fun onFailure(errorMessage: String) {
+                    liveData.postValue(PictureOfTheDayAppState.Error(Throwable(errorMessage)))
+                }
 
-        })
+            })
     }
 
 
