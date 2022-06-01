@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".view.picture.PictureOfTheDayFragment">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputLayout"
@@ -13,8 +11,10 @@
         android:hint="@string/search_wiki"
         app:counterEnabled="true"
         app:counterMaxLength="20"
+        app:endIconContentDescription="content_description_end_icon"
+        app:endIconDrawable="@drawable/ic_wikipedia"
+        app:endIconMode="custom"
         app:helperText="@string/wiki_helper_text"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -22,7 +22,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/input_edit_text"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.gb.weconquernasa.utils.EquilateralImageView
@@ -34,7 +35,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputLayout"
-        app:srcCompat="@drawable/ic_mage_not_supported" />
+        app:layout_constraintTop_toBottomOf="@id/inputLayout"
+        app:srcCompat="@drawable/ic_no_photo_vector" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <include
+        android:id="@+id/lifeHackBehavior"
+        layout="@layout/bottom_sheet_layout" />
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
