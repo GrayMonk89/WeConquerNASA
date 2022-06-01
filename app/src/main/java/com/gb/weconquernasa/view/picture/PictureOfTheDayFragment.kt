@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -16,11 +17,14 @@ import com.gb.weconquernasa.utils.LOG_KEY
 import com.gb.weconquernasa.utils.showSnackBar
 import com.gb.weconquernasa.viewmodel.PictureOfTheDayAppState
 import com.gb.weconquernasa.viewmodel.PictureOfTheDayViewModel
+import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
 import kotlin.system.exitProcess
 
 class PictureOfTheDayFragment : Fragment() {
+
+    var isMain = true
 
     private var _binding: FragmentPictureOfTheDayBinding? = null
     private val binding: FragmentPictureOfTheDayBinding
@@ -50,7 +54,25 @@ class PictureOfTheDayFragment : Fragment() {
         initEndIconListener()
         initSheetBehavior()
         initMenuAppBar()
+        initFABListener()
 
+    }
+
+    private fun initFABListener(){
+        binding.fab.setOnClickListener {
+            if(isMain){
+                binding.bottomAppBar.navigationIcon = null
+                binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
+                binding.fab.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.ic_back_fab))
+                binding.bottomAppBar.replaceMenu(R.menu.menu_empty)
+            } else {
+                binding.bottomAppBar.navigationIcon = (ContextCompat.getDrawable(requireContext(),R.drawable.ic_hamburger_menu_bottom_bar))
+                binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
+                binding.fab.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.ic_plus_fab))
+                binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)
+            }
+            isMain = !isMain
+        }
     }
 
     private fun initMenuAppBar() {
