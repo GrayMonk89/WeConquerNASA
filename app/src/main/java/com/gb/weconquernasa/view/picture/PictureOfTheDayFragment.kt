@@ -4,19 +4,21 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import coil.load
+import com.gb.weconquernasa.MainActivity
 import com.gb.weconquernasa.R
 import com.gb.weconquernasa.databinding.FragmentPictureOfTheDayBinding
 import com.gb.weconquernasa.utils.LOG_KEY
+import com.gb.weconquernasa.utils.showSnackBar
 import com.gb.weconquernasa.viewmodel.PictureOfTheDayAppState
 import com.gb.weconquernasa.viewmodel.PictureOfTheDayViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.snackbar.Snackbar
+import kotlin.system.exitProcess
 
 class PictureOfTheDayFragment : Fragment() {
 
@@ -47,7 +49,34 @@ class PictureOfTheDayFragment : Fragment() {
         initViewModel()
         initEndIconListener()
         initSheetBehavior()
+        initMenuAppBar()
 
+    }
+
+    private fun initMenuAppBar() {
+        (requireActivity() as MainActivity).setSupportActionBar(binding.bottomAppBar)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_bottom_bar, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.actionFavouriteAppBar -> {
+                view?.showSnackBar(item.title.toString(),"",{},Snackbar.LENGTH_SHORT)
+            }
+            R.id.actionSettingsAppBar -> {
+                view?.showSnackBar(item.title.toString(),"",{},Snackbar.LENGTH_SHORT)
+            }
+            R.id.actionExitAppBar -> {
+                exitProcess(0)
+            }
+
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun initSheetBehavior() {
@@ -62,7 +91,9 @@ class PictureOfTheDayFragment : Fragment() {
                     BottomSheetBehavior.STATE_COLLAPSED -> {}
                     BottomSheetBehavior.STATE_EXPANDED -> {}
                     BottomSheetBehavior.STATE_HALF_EXPANDED -> {}
-                    BottomSheetBehavior.STATE_HIDDEN -> {bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED}
+                    BottomSheetBehavior.STATE_HIDDEN -> {
+                        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                    }
                     BottomSheetBehavior.STATE_SETTLING -> {}
                 }
             }
