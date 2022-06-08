@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">We conquer NASA</string>
+    <string name="search_wiki">Найти в Википедии</string>
+    <string name="photo_of_the_day_stub">Фото дня</string>
+    <string name="wiki_helper_text">Поищите термин в википедии</string>
+    <string name="favourite">Избранное</string>
+    <string name="settings">Настороки</string>
+    <string name="search">Поиск</string>
+    <string name="hello_blank_fragment">Привет пустой фрагмент</string>
+    <string name="first_screen">На экран 1</string>
+    <string name="second_screen">На экран 2</string>
+    <string name="today">Сегодня</string>
+    <string name="yesterday">Вчера</string>
+    <string name="third_day">Позавчера</string>
+</resources>
