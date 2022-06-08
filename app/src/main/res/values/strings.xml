@@ -13,4 +13,7 @@
     <string name="today">Today</string>
     <string name="yesterday">Yesterday</string>
     <string name="third_day">Third day</string>
+    <string name="menu_one">Menu one</string>
+    <string name="menu_two">Menu two</string>
+    <string name="menu_three">Menu three</string>
 </resources>

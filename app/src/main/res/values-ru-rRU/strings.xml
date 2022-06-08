@@ -13,4 +13,7 @@
     <string name="today">Сегодня</string>
     <string name="yesterday">Вчера</string>
     <string name="third_day">Позавчера</string>
+    <string name="menu_one">Меню один</string>
+    <string name="menu_two">Меню два</string>
+    <string name="menu_three">Меню три</string>
 </resources>

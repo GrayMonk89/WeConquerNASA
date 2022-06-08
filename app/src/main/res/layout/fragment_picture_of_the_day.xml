@@ -6,7 +6,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputLayout"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/search_wiki"
         app:counterEnabled="true"
@@ -25,6 +25,33 @@
             android:layout_height="wrap_content"
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        app:layout_anchor="@id/imageView"
+        app:layout_anchorGravity="top">
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="?actionBarSize"
+            android:tag="@string/today"
+            android:text="@string/today" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="?actionBarSize"
+            android:tag="@string/yesterday"
+            android:text="@string/yesterday" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="?actionBarSize"
+            android:tag="@string/third_day"
+            android:text="@string/third_day" />
+    </com.google.android.material.tabs.TabLayout>
 
     <com.gb.weconquernasa.utils.EquilateralImageView
         android:id="@+id/imageView"
@@ -51,31 +78,6 @@
         app:fabAlignmentMode="center"
         app:navigationIcon="@drawable/ic_hamburger_menu_bottom_bar" />
 
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        app:singleSelection="true">
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chipToday"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/today" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chipYesterday"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/yesterday"/>
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chipThirdDay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/third_day" />
-    </com.google.android.material.chip.ChipGroup>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"

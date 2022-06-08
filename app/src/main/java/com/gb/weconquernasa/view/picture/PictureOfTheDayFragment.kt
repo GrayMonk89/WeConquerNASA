@@ -14,13 +14,13 @@ import com.gb.weconquernasa.MainActivity
 import com.gb.weconquernasa.R
 import com.gb.weconquernasa.databinding.FragmentPictureOfTheDayBinding
 import com.gb.weconquernasa.utils.*
+import com.gb.weconquernasa.view.settings.SettingsFragment
 import com.gb.weconquernasa.viewmodel.PictureOfTheDayAppState
 import com.gb.weconquernasa.viewmodel.PictureOfTheDayViewModel
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipGroup
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.tabs.TabLayout
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -59,41 +59,37 @@ class PictureOfTheDayFragment : Fragment() {
         initSheetBehavior()
         initMenuAppBar()
         initFABListener()
-        initChipListener()
+        initTabsListener()
+
 
     }
 
-    private fun initChipListener() {
-        binding.chipGroup.setOnCheckedStateChangeListener { chipGroup: ChipGroup, mutableList: MutableList<Int> ->
-            for (id in mutableList) {
-                when (id) {
-                    R.id.chipToday -> {
-                        viewModel.getPicture(makeDate(DEFAULT_VALUE_ZERO))
-                    }
-                    R.id.chipYesterday -> {
-                        viewModel.getPicture(makeDate(DEFAULT_VALUE_ONE))
-                    }
-                    R.id.chipThirdDay -> {
-                        viewModel.getPicture(makeDate(DEFAULT_VALUE_TWO))
+    private fun initTabsListener() {
+        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                tab?.let {
+                    when (it.position) {
+                        DEFAULT_VALUE_ZERO -> {
+                            viewModel.getPicture(makeDate(DEFAULT_VALUE_ZERO))
+                        }
+                        DEFAULT_VALUE_ONE -> {
+                            viewModel.getPicture(makeDate(DEFAULT_VALUE_ONE))
+                        }
+                        DEFAULT_VALUE_TWO -> {
+                            viewModel.getPicture(makeDate(DEFAULT_VALUE_TWO))
+                        }
                     }
                 }
             }
-        }
 
-/*        binding.chipGroup.setOnCheckedChangeListener { group, position ->
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
 
-            when (position) {
-                R.id.chipToday -> {
-                    viewModel.getPicture(makeDate(DEFAULT_VALUE_ZERO))
-                }
-                R.id.chipYesterday -> {
-                    viewModel.getPicture(makeDate(DEFAULT_VALUE_ONE))
-                }
-                R.id.chipThirdDay -> {
-                    viewModel.getPicture(makeDate(DEFAULT_VALUE_TWO))
-                }
             }
-        }*/
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+
+            }
+        })
     }
 
     private fun initFABListener() {
@@ -143,6 +139,9 @@ class PictureOfTheDayFragment : Fragment() {
             }
             R.id.actionSettingsAppBar -> {
                 view?.showSnackBar(item.title.toString(), "", {}, Snackbar.LENGTH_SHORT)
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.mainContainer, SettingsFragment.newInstance()).addToBackStack("")
+                    .commit()
             }
             R.id.actionExitAppBar -> {
                 exitProcess(0)
