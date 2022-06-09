@@ -12,6 +12,7 @@
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.tabs.TabItem
@@ -34,7 +35,7 @@
     </com.google.android.material.tabs.TabLayout>
 
     <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipGroup"
+        android:id="@+id/chipGroupMenuOne"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -45,21 +46,81 @@
         app:singleSelection="true">
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chipToday"
+            android:id="@+id/chipOneMenuOne"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/today" />
+            android:text="@string/menu_one" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chipYesterday"
+            android:id="@+id/chipTwoMenuOne"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/yesterday" />
+            android:text="@string/menu_one" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chipThirdDay"
+            android:id="@+id/chipThreeMenuOne"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/third_day" />
+            android:text="@string/menu_one" />
+    </com.google.android.material.chip.ChipGroup>
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroupMenuTwo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout"
+        app:singleSelection="true">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipOneMenuTwo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/menu_two" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipTwoMenuTwo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/menu_two" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipThreeDayMenuTwo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/menu_two" />
+    </com.google.android.material.chip.ChipGroup>
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroupMenuThree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout"
+        app:singleSelection="true">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipOneMenuThree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/menu_three" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipTwoMenuThree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/menu_three" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipThreeDayMenuThree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/menu_three" />
     </com.google.android.material.chip.ChipGroup>
 </androidx.constraintlayout.widget.ConstraintLayout>
