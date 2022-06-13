@@ -214,7 +214,7 @@ class PictureOfTheDayFragment : Fragment() {
             is PictureOfTheDayAppState.Success -> {
                 binding.imageView.load(pictureOfTheDayAppState.pictureOfTheDayResponseData.url) {
                     crossfade(true)
-                    placeholder(R.drawable.g2)
+                    placeholder(R.drawable.load)
                 }
                 binding.lifeHackBehavior.title.text =
                     pictureOfTheDayAppState.pictureOfTheDayResponseData.title

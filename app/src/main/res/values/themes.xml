@@ -26,6 +26,9 @@
         <item name="textInputStyle">@style/MyStyle</item>
         <item name="floatingActionButtonStyle">@style/MyStyleFloatingActionButton</item>
         <item name="chipStyle">@style/MyChipStyle</item>
+
+        <item name="textAppearanceBody2">@style/MyTextAppearance</item>
+
     </style>
 
     <style name="BlueTheme" parent="DefaultTheme">

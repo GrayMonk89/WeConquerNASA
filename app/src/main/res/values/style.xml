@@ -13,4 +13,12 @@
         <item name="counterEnabled">false</item>
         <item name="errorTextColor">#034AFF</item>
     </style>
+    
+    <style name="MyTextAppearance" parent="TextAppearance.AppCompat.Body2">
+        <item name="fontFamily">@font/kranky</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:letterSpacing">0.2</item>
+    </style>
 </resources>
