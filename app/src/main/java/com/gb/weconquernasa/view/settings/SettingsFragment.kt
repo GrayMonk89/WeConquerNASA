@@ -1,13 +1,14 @@
 package com.gb.weconquernasa.view.settings
 
+import android.content.Context
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import com.gb.weconquernasa.MainActivity
 import com.gb.weconquernasa.R
 import com.gb.weconquernasa.databinding.FragmentSettingsBinding
-import com.gb.weconquernasa.utils.DEFAULT_VALUE_ONE
-import com.gb.weconquernasa.utils.DEFAULT_VALUE_TWO
-import com.gb.weconquernasa.utils.DEFAULT_VALUE_ZERO
+import com.gb.weconquernasa.utils.*
+import com.google.android.material.chip.ChipGroup
 import com.google.android.material.tabs.TabLayout
 
 class SettingsFragment : Fragment() {
@@ -15,6 +16,12 @@ class SettingsFragment : Fragment() {
     private var _binding: FragmentSettingsBinding? = null
     private val binding: FragmentSettingsBinding
         get() = _binding!!
+
+    private lateinit var parentActivity : MainActivity
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        parentActivity = requireActivity() as MainActivity
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +43,34 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initTabsListener()
+        setThemeChoice()
 
+    }
+
+    private fun setThemeChoice(){
+        when (parentActivity.getCurrentTheme()) {
+            1 -> binding.chipGroupMenu.check(R.id.chipOneMenuOne)
+            2 -> binding.chipGroupMenu.check(R.id.chipTwoMenuOne)
+            3 -> binding.chipGroupMenu.check(R.id.chipThreeMenuOne)
+        }
+        binding.chipGroupMenu.setOnCheckedStateChangeListener { chipGroup: ChipGroup, mutableList: MutableList<Int> ->
+            for (id in mutableList) {
+                when (id) {
+                    R.id.chipOneMenuOne -> {
+                        parentActivity.setCurrentTheme(THEME_ONE)
+                        parentActivity.recreate()
+                    }
+                    R.id.chipTwoMenuOne -> {
+                        parentActivity.setCurrentTheme(THEME_TWO)
+                        parentActivity.recreate()
+                    }
+                    R.id.chipThreeMenuOne -> {
+                        parentActivity.setCurrentTheme(THEME_THREE)
+                        parentActivity.recreate()
+                    }
+                }
+            }
+        }
     }
 
     private fun initTabsListener() {
@@ -45,17 +79,17 @@ class SettingsFragment : Fragment() {
                 tab?.let {
                     when (it.position) {
                         DEFAULT_VALUE_ZERO -> {
-                            binding.chipGroupMenuOne.visibility = View.VISIBLE
+                            binding.chipGroupMenu.visibility = View.VISIBLE
                             binding.chipGroupMenuTwo.visibility = View.GONE
                             binding.chipGroupMenuThree.visibility = View.GONE
                         }
                         DEFAULT_VALUE_ONE -> {
-                            binding.chipGroupMenuOne.visibility = View.GONE
+                            binding.chipGroupMenu.visibility = View.GONE
                             binding.chipGroupMenuTwo.visibility = View.VISIBLE
                             binding.chipGroupMenuThree.visibility = View.GONE
                         }
                         DEFAULT_VALUE_TWO -> {
-                            binding.chipGroupMenuOne.visibility = View.GONE
+                            binding.chipGroupMenu.visibility = View.GONE
                             binding.chipGroupMenuTwo.visibility = View.GONE
                             binding.chipGroupMenuThree.visibility = View.VISIBLE
                         }

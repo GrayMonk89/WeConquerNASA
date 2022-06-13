@@ -29,6 +29,10 @@
 
         <item name="textAppearanceBody2">@style/MyTextAppearance</item>
 
+        <item name="shapeAppearanceSmallComponent">@style/MySmallShape</item>
+        <item name="shapeAppearanceMediumComponent">@style/MyMediumShape</item>
+
+
     </style>
 
     <style name="BlueTheme" parent="DefaultTheme">

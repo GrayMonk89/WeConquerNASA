@@ -16,4 +16,7 @@
     <string name="menu_one">Меню один</string>
     <string name="menu_two">Меню два</string>
     <string name="menu_three">Меню три</string>
+    <string name="red_theme">Красная тема</string>
+    <string name="green_theme">Зеленая тема</string>
+    <string name="blue_theme">Синяя тема</string>
 </resources>

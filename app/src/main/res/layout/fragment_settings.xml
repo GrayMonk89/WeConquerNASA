@@ -35,7 +35,7 @@
     </com.google.android.material.tabs.TabLayout>
 
     <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipGroupMenuOne"
+        android:id="@+id/chipGroupMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -49,19 +49,19 @@
             android:id="@+id/chipOneMenuOne"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/menu_one" />
+            android:text="@string/green_theme" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chipTwoMenuOne"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/menu_one" />
+            android:text="@string/red_theme" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chipThreeMenuOne"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/menu_one" />
+            android:text="@string/blue_theme" />
     </com.google.android.material.chip.ChipGroup>
 
     <com.google.android.material.chip.ChipGroup

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="MyChipStyle" parent="Widget.MaterialComponents.Chip.Choice" />
+    <style name="MyChipStyle" parent="Widget.MaterialComponents.Chip.Choice">
+<!--        <item name="shapeAppearance">@style/MyMediumShape</item>-->
+    </style>
 
     <style name="MyStyleFloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
         <item name="tint">@color/red_600</item>
@@ -20,5 +22,15 @@
         <item name="android:textAllCaps">true</item>
         <item name="android:textSize">14sp</item>
         <item name="android:letterSpacing">0.2</item>
+    </style>
+
+    <style name="MySmallShape" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerSize">33%</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+
+    <style name="MyMediumShape" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerSize">5dp</item>
+        <item name="cornerFamily">cut</item>
     </style>
 </resources>
