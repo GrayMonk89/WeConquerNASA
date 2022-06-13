@@ -15,5 +15,9 @@ const val THEME_THREE = 3
 const val KEY_SP = "sp"
 const val KEY_CURRENT_THEME = "current_theme"
 
+const val EARTH_DEFAULT_VALUE = 0
+const val SOLAR_SYSTEM_DEFAULT_VALUE = 1
+const val MARS_DEFAULT_VALUE = 2
+
 class KeyStorage {
 }
