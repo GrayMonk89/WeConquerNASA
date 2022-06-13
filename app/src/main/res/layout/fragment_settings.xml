@@ -5,7 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".view.settings.SettingsFragment">
+    android:background="@color/white"
+    android:clickable="true"
+    tools:context=".view.settings.SettingsFragment"
+    android:focusable="true">
 
 
     <com.google.android.material.tabs.TabLayout

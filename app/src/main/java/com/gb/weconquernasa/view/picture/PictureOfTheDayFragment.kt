@@ -28,7 +28,7 @@ import kotlin.system.exitProcess
 
 class PictureOfTheDayFragment : Fragment() {
 
-    var isMain = true
+
 
     private var _binding: FragmentPictureOfTheDayBinding? = null
     private val binding: FragmentPictureOfTheDayBinding
@@ -57,8 +57,7 @@ class PictureOfTheDayFragment : Fragment() {
         initViewModel()
         initEndIconListener()
         initSheetBehavior()
-        initMenuAppBar()
-        initFABListener()
+
         initTabsListener()
 
 
@@ -92,68 +91,7 @@ class PictureOfTheDayFragment : Fragment() {
         })
     }
 
-    private fun initFABListener() {
-        binding.fab.setOnClickListener {
-            if (isMain) {
-                binding.bottomAppBar.navigationIcon = null
-                binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
-                binding.fab.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        requireContext(),
-                        R.drawable.ic_back_fab
-                    )
-                )
-                binding.bottomAppBar.replaceMenu(R.menu.menu_empty)
-            } else {
-                binding.bottomAppBar.navigationIcon = (ContextCompat.getDrawable(
-                    requireContext(),
-                    R.drawable.ic_hamburger_menu_bottom_bar
-                ))
-                binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
-                binding.fab.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        requireContext(),
-                        R.drawable.ic_plus_fab
-                    )
-                )
-                binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)
-            }
-            isMain = !isMain
-        }
-    }
 
-    private fun initMenuAppBar() {
-        (requireActivity() as MainActivity).setSupportActionBar(binding.bottomAppBar)
-        setHasOptionsMenu(true)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu_bottom_bar, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.actionFavouriteAppBar -> {
-                view?.showSnackBar(item.title.toString(), "", {}, Snackbar.LENGTH_SHORT)
-            }
-            R.id.actionSettingsAppBar -> {
-                view?.showSnackBar(item.title.toString(), "", {}, Snackbar.LENGTH_SHORT)
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.mainContainer, SettingsFragment.newInstance()).addToBackStack("")
-                    .commit()
-            }
-            R.id.actionExitAppBar -> {
-                exitProcess(0)
-            }
-            android.R.id.home -> {
-                BottomNavigationDrawerFragment.newInstance()
-                    .show(requireActivity().supportFragmentManager, "")
-            }
-
-        }
-        return super.onOptionsItemSelected(item)
-    }
 
     private fun initSheetBehavior() {
         val bottomSheetBehavior =
