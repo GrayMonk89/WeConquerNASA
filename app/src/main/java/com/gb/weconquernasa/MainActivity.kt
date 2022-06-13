@@ -2,6 +2,7 @@ package com.gb.weconquernasa
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatDelegate
 import com.gb.weconquernasa.utils.*
 import com.gb.weconquernasa.view.picture.PictureOfTheDayFragment
 
@@ -31,6 +32,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getRealStyle(currentTheme: Int): Int {
+
+        if (android.os.Build.VERSION.SDK_INT >= 29) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
+
         return when (currentTheme) {
             THEME_ONE -> R.style.GreenTheme
             THEME_TWO -> R.style.RedTheme
