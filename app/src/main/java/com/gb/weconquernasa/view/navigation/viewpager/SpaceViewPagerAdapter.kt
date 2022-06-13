@@ -9,7 +9,7 @@ import com.gb.weconquernasa.view.navigation.EarthFragment
 import com.gb.weconquernasa.view.navigation.MarsFragment
 import com.gb.weconquernasa.view.navigation.SolSystemFragment
 
-class ViewPagerAdapter(private val fragmentManager: FragmentManager) :
+class SpaceViewPagerAdapter(private val fragmentManager: FragmentManager) :
     FragmentStatePagerAdapter(fragmentManager) {
 
     private val fragments = arrayOf(

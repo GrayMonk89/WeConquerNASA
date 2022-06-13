@@ -12,7 +12,8 @@ import com.gb.weconquernasa.databinding.FragmentSolSystemBinding
 class MarsFragment : Fragment() {
 
     private var _binding: FragmentMarsBinding? = null
-    private val binding: FragmentMarsBinding  = _binding!!
+    private val binding: FragmentMarsBinding
+        get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
