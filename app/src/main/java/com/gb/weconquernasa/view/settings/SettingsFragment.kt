@@ -3,6 +3,7 @@ package com.gb.weconquernasa.view.settings
 import android.content.Context
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.gb.weconquernasa.MainActivity
 import com.gb.weconquernasa.R
@@ -44,7 +45,17 @@ class SettingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initTabsListener()
         setThemeChoice()
+        setDayNightChoice()
+    }
 
+    private fun setDayNightChoice() {
+        binding.switchTheme.setOnCheckedChangeListener { view, isChecked ->
+            if(isChecked){
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }else{
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        }
     }
 
     private fun setThemeChoice(){

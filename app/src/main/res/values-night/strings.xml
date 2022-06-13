@@ -3,4 +3,5 @@
     <string name="green_theme">Green theme</string>
     <string name="red_theme">Red theme</string>
     <string name="blue_theme">Blue theme</string>
+    <string name="day_night">Day/Night</string>
 </resources>
