@@ -10,16 +10,14 @@ import com.gb.weconquernasa.databinding.FragmentApiBottomBinding
 import com.gb.weconquernasa.view.navigation.space.EarthFragment
 import com.gb.weconquernasa.view.navigation.space.MarsFragment
 import com.gb.weconquernasa.view.navigation.space.SolSystemFragment
+import com.google.android.material.badge.BadgeDrawable
 
 class ApiBottomFragment : Fragment() {
 
     private var _binding: FragmentApiBottomBinding? = null
     private val binding: FragmentApiBottomBinding
         get() = _binding!!
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private var click: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,9 +29,25 @@ class ApiBottomFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initBottomNavigationListener()
+        setBadgeBottomNavigationEarth()
+    }
+
+    private fun setBadgeBottomNavigationEarth() {
+        val badge = binding
+            .bottomNavigation
+            .getOrCreateBadge(R.id.actionSpaceBottomNavigationEarth)
+        badge.number = click
+        badge.maxCharacterCount = 2
+        badge.badgeGravity = BadgeDrawable.TOP_END
+    }
+
+    private fun initBottomNavigationListener() {
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.actionSpaceBottomNavigationEarth -> {
+                    click++
+                    binding.bottomNavigation.getOrCreateBadge(R.id.actionSpaceBottomNavigationEarth).number = click
                     requireActivity().supportFragmentManager.beginTransaction()
                         .replace(R.id.container, EarthFragment.newInstance()).commit()
                     true
@@ -54,6 +68,11 @@ class ApiBottomFragment : Fragment() {
             }
         }
         binding.bottomNavigation.selectedItemId = R.id.actionSpaceBottomNavigationEarth
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     companion object {
