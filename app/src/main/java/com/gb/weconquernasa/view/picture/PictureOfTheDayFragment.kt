@@ -4,27 +4,26 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.view.*
-import androidx.core.content.ContextCompat
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import coil.load
-import com.gb.weconquernasa.MainActivity
 import com.gb.weconquernasa.R
 import com.gb.weconquernasa.databinding.FragmentPictureOfTheDayBinding
-import com.gb.weconquernasa.utils.*
-import com.gb.weconquernasa.view.settings.SettingsFragment
+import com.gb.weconquernasa.utils.DEFAULT_VALUE_ONE
+import com.gb.weconquernasa.utils.DEFAULT_VALUE_TWO
+import com.gb.weconquernasa.utils.DEFAULT_VALUE_ZERO
+import com.gb.weconquernasa.utils.LOG_KEY
 import com.gb.weconquernasa.viewmodel.PictureOfTheDayAppState
 import com.gb.weconquernasa.viewmodel.PictureOfTheDayViewModel
-import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.system.exitProcess
 
 class PictureOfTheDayFragment : Fragment() {
 

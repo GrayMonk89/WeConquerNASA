@@ -1,13 +1,11 @@
-package com.gb.weconquernasa.view.navigation
+package com.gb.weconquernasa.view.navigation.space
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.gb.weconquernasa.R
+import androidx.fragment.app.Fragment
 import com.gb.weconquernasa.databinding.FragmentEarthBinding
-import com.gb.weconquernasa.databinding.FragmentSolSystemBinding
 
 class EarthFragment : Fragment() {
 

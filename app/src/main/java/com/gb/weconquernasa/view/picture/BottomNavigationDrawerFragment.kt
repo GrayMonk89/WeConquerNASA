@@ -9,7 +9,6 @@ import com.gb.weconquernasa.R
 import com.gb.weconquernasa.databinding.FragmentBottomNavigationLayoutBinding
 import com.gb.weconquernasa.utils.LOG_KEY
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.android.material.snackbar.Snackbar
 
 
 class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {

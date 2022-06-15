@@ -7,9 +7,9 @@ import com.gb.weconquernasa.utils.DEFAULT_VALUE_ONE
 import com.gb.weconquernasa.utils.DEFAULT_VALUE_ZERO
 import com.gb.weconquernasa.utils.EARTH_DEFAULT_VALUE
 import com.gb.weconquernasa.utils.SOLAR_SYSTEM_DEFAULT_VALUE
-import com.gb.weconquernasa.view.navigation.EarthFragment
-import com.gb.weconquernasa.view.navigation.MarsFragment
-import com.gb.weconquernasa.view.navigation.SolSystemFragment
+import com.gb.weconquernasa.view.navigation.space.EarthFragment
+import com.gb.weconquernasa.view.navigation.space.MarsFragment
+import com.gb.weconquernasa.view.navigation.space.SolSystemFragment
 
 class SpaceViewPagerAdapter(private val fragmentManager: FragmentManager) :
     FragmentStatePagerAdapter(fragmentManager) {
