@@ -29,7 +29,20 @@ class SpaceViewPagerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.spaceViewPager.adapter = SpaceViewPagerAdapter(requireActivity().supportFragmentManager)
+        initViewPager()
+        setIcon()
+    }
+
+    private fun initViewPager() {
+        binding.spaceViewPager.adapter =
+            SpaceViewPagerAdapter(requireActivity().supportFragmentManager)
+        binding.tabLayoutSpace.setupWithViewPager(binding.spaceViewPager)
+    }
+
+    private fun setIcon() {
+        binding.tabLayoutSpace.getTabAt(0)?.setIcon(R.drawable.ic_earth)
+        binding.tabLayoutSpace.getTabAt(1)?.setIcon(R.drawable.ic_system)
+        binding.tabLayoutSpace.getTabAt(2)?.setIcon(R.drawable.ic_mars)
     }
 
     companion object {

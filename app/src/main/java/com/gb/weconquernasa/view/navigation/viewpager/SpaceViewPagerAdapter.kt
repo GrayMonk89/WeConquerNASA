@@ -3,6 +3,8 @@ package com.gb.weconquernasa.view.navigation.viewpager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
+import com.gb.weconquernasa.utils.DEFAULT_VALUE_ONE
+import com.gb.weconquernasa.utils.DEFAULT_VALUE_ZERO
 import com.gb.weconquernasa.utils.EARTH_DEFAULT_VALUE
 import com.gb.weconquernasa.utils.SOLAR_SYSTEM_DEFAULT_VALUE
 import com.gb.weconquernasa.view.navigation.EarthFragment
@@ -35,4 +37,13 @@ class SpaceViewPagerAdapter(private val fragmentManager: FragmentManager) :
             }
         }
     }
+
+    override fun getPageTitle(position: Int): CharSequence? {
+        return         return when(position){
+            DEFAULT_VALUE_ZERO-> "Earth"
+            DEFAULT_VALUE_ONE-> "System"
+            else -> "Mars"
+        }
+    }
+
 }

@@ -20,4 +20,7 @@
     <string name="green_theme">Зеленая тема</string>
     <string name="blue_theme">Синяя тема</string>
     <string name="day_night">День/Ночь</string>
+    <string name="earth">Земля</string>
+    <string name="system">Система</string>
+    <string name="mars">Марс</string>
 </resources>

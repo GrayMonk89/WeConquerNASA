@@ -20,4 +20,7 @@
     <string name="red_theme">Red theme</string>
     <string name="blue_theme">Blue theme</string>
     <string name="day_night">Day/Night</string>
+    <string name="earth">Earth</string>
+    <string name="system">System</string>
+    <string name="mars">Mars</string>
 </resources>
