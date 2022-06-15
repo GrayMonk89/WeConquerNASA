@@ -32,14 +32,16 @@
         <item name="shapeAppearanceSmallComponent">@style/MySmallShape</item>
         <item name="shapeAppearanceMediumComponent">@style/MyMediumShape</item>
 
+        <item name="bottomNavigationStyle">@style/MyBottomNavigationView</item>
+
 
     </style>
 
     <style name="BlueTheme" parent="DefaultTheme">
         <item name="superColor">@color/blue</item>
-        <item name="superColorPrimary">@color/blue</item>
-        <item name="superColorSecondary">@color/blue</item>
-        <item name="superColorOnPrimary">@color/blue</item>
+        <item name="superColorPrimary">@color/blue_700</item>
+        <item name="superColorSecondary">@color/blue_500</item>
+        <item name="superColorOnPrimary">@color/blue_200</item>
         <item name="superColorOnSecondary">@color/blue</item>
     </style>
 
@@ -52,10 +54,10 @@
     </style>
 
     <style name="GreenTheme" parent="DefaultTheme">
-        <item name="superColor">@color/green</item>
-        <item name="superColorPrimary">@color/green</item>
-        <item name="superColorSecondary">@color/green</item>
-        <item name="superColorOnPrimary">@color/green</item>
-        <item name="superColorOnSecondary">@color/green</item>
+        <item name="superColor">@color/green_900</item>
+        <item name="superColorPrimary">@color/green_900</item>
+        <item name="superColorSecondary">@color/green_500</item>
+        <item name="superColorOnPrimary">@color/green_200</item>
+        <item name="superColorOnSecondary">@color/green_700</item>
     </style>
 </resources>

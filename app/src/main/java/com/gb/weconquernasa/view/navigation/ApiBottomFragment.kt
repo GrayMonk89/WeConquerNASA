@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import com.gb.weconquernasa.R
 import com.gb.weconquernasa.databinding.FragmentApiBottomBinding
 import com.gb.weconquernasa.view.navigation.space.EarthFragment
@@ -40,6 +41,8 @@ class ApiBottomFragment : Fragment() {
         badge.number = click
         badge.maxCharacterCount = 2
         badge.badgeGravity = BadgeDrawable.TOP_END
+        badge.backgroundColor = ContextCompat.getColor(requireContext(), R.color.purple_200)
+        badge.badgeTextColor = ContextCompat.getColor(requireContext(), R.color.white)
     }
 
     private fun initBottomNavigationListener() {
@@ -47,9 +50,13 @@ class ApiBottomFragment : Fragment() {
             when (item.itemId) {
                 R.id.actionSpaceBottomNavigationEarth -> {
                     click++
-                    binding.bottomNavigation.getOrCreateBadge(R.id.actionSpaceBottomNavigationEarth).number = click
-                    requireActivity().supportFragmentManager.beginTransaction()
-                        .replace(R.id.container, EarthFragment.newInstance()).commit()
+                    binding.bottomNavigation.getOrCreateBadge(R.id.actionSpaceBottomNavigationEarth).number =
+                        click
+                    if (click >= 10){
+                        binding.bottomNavigation.removeBadge(R.id.actionSpaceBottomNavigationEarth)
+                    }
+                        requireActivity().supportFragmentManager.beginTransaction()
+                            .replace(R.id.container, EarthFragment.newInstance()).commit()
                     true
                 }
                 R.id.actionSpaceBottomNavigationSystem -> {

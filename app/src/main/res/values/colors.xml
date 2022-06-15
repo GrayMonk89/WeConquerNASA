@@ -23,10 +23,23 @@
     <color name="red_700">#D72A2A</color>
     <color name="red_800">#C82424</color>
     <color name="red_900">#AE0B0B</color>
-
     <color name="red">#FFAE0B0B</color>
-    <color name="green">#FF66EF12</color>
+
+
+    <color name="green_900">#FF66EF12</color>
+    <color name="green_700">#75F427</color>
+    <color name="green_500">#98F85D</color>
+    <color name="green_200">#CAF4B1</color>
+
+
     <color name="blue">#FF10B0F4</color>
+    <color name="blue_700">#52C5F6</color>
+    <color name="blue_500">#85CDEC</color>
+    <color name="blue_200">#B9E4F6</color>
+
+
+    <color name="ripple_color_unselected">#673AB7</color>
+    <color name="ripple_color_selected">?superColorPrimary</color>
 
     <color name="colorAccent40Alfa">#66FBC7CC</color>
 

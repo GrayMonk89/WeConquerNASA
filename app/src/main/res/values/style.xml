@@ -33,4 +33,13 @@
         <item name="cornerSize">5dp</item>
         <item name="cornerFamily">cut</item>
     </style>
+
+    <style name="MyBottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="itemIconTint">@drawable/my_navigation_bar_item_tint</item>
+        <item name="itemTextColor">@drawable/my_navigation_bar_item_tint</item>
+        <item name="itemRippleColor">@drawable/my_ripple</item>
+        <item name="itemIconSize"> @dimen/bottom_navigation_icon_size</item>
+        <item name="textAppearanceBody2">@style/MyTextAppearance</item>
+    </style>
+
 </resources>
