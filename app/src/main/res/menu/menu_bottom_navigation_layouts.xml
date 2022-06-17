@@ -3,14 +3,14 @@
     <item
         android:id="@+id/actionBottomNavigationConstraint"
         android:icon="@drawable/ic_earth"
-        android:title="@string/earth" />
+        android:title="@string/constraint" />
     <item
         android:id="@+id/actionBottomNavigationCoordinator"
         android:icon="@drawable/ic_system"
-        android:title="@string/system" />
+        android:title="@string/coordinator" />
 
     <item
         android:id="@+id/actionBottomNavigationMotion"
         android:icon="@drawable/ic_mars"
-        android:title="@string/mars" />
+        android:title="@string/motion" />
 </menu>

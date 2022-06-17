@@ -23,4 +23,9 @@
     <string name="earth">Earth</string>
     <string name="system">System</string>
     <string name="mars">Mars</string>
+    <string name="exit">Exit</string>
+    <string name="plus">Plus</string>
+    <string name="constraint" translatable="false">Constraint</string>
+    <string name="coordinator" translatable="false">Coordinator</string>
+    <string name="motion" translatable="false">Motion</string>
 </resources>

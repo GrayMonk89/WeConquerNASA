@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.gb.weconquernasa.R
 import com.gb.weconquernasa.databinding.FragmentLayoutBinding
+import com.gb.weconquernasa.layout.fragments.ConstraintFragment
+import com.gb.weconquernasa.layout.fragments.CoordinatorFragment
+import com.gb.weconquernasa.layout.fragments.MotionFragment
 import kotlin.system.exitProcess
 
 class LayoutFragment : Fragment() {
@@ -29,9 +32,39 @@ class LayoutFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.fabExit.setOnClickListener(){
+        setFABListener()
+        initBottomNavigationView()
+    }
+
+    private fun setFABListener() {
+        binding.fabExit.setOnClickListener() {
             exitProcess(0)
         }
+    }
+
+    private fun initBottomNavigationView() {
+        binding.bottomNavigation.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.actionBottomNavigationConstraint -> {
+                    navigationTo(ConstraintFragment())
+                    true
+                }
+                R.id.actionBottomNavigationCoordinator -> {
+                    navigationTo(CoordinatorFragment())
+                    true
+                }
+                R.id.actionBottomNavigationMotion -> {
+                    navigationTo(MotionFragment())
+                    true
+                }
+                else -> true
+            }
+        }
+        binding.bottomNavigation.selectedItemId = R.id.actionBottomNavigationConstraint
+    }
+
+    private fun navigationTo(f: Fragment) {
+        requireActivity().supportFragmentManager.beginTransaction().replace(R.id.container, f).commit()
     }
 
     override fun onDestroy() {
