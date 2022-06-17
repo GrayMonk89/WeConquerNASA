@@ -3,7 +3,56 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/parentSDuper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1"
+        app:layout_constraintBottom_toBottomOf="@id/guideline"
+        app:layout_constraintCircleAngle="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guideline"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/button1"
+        app:layout_constraintCircle="@id/parentSDuper"
+        app:layout_constraintCircleRadius="150dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintCircleAngle="320"/>
+
+    <Button
+        android:id="@+id/button2"
+        app:layout_constraintCircle="@id/parentSDuper"
+        app:layout_constraintCircleRadius="130dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintCircleAngle="45"/>
+    <Button
+        android:id="@+id/button3"
+        app:layout_constraintCircle="@id/parentSDuper"
+        app:layout_constraintCircleRadius="130dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintCircleAngle="300"/>
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/allButtonsGroup"
