@@ -6,6 +6,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.gb.weconquernasa.databinding.ActivityMainBinding
+import com.gb.weconquernasa.layout.LayoutFragment
 import com.gb.weconquernasa.utils.*
 import com.gb.weconquernasa.view.navigation.MainViewPagerFragment
 import com.gb.weconquernasa.view.picture.BottomNavigationDrawerFragment
@@ -15,11 +16,11 @@ import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {
 
-    private var isMain = true
+
 
     private var _binding: ActivityMainBinding? = null
-    private val binding:ActivityMainBinding
-    get() = _binding!!
+    private val binding: ActivityMainBinding
+        get() = _binding!!
 
     override fun onDestroy() {
         super.onDestroy()
@@ -34,75 +35,14 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) {//PictureOfTheDayFragment.newInstance()
             supportFragmentManager.beginTransaction().replace(
                 R.id.mainContainer,
-                MainViewPagerFragment.newInstance()
+                LayoutFragment.newInstance()
             ).commit()
         }
-        initMenuAppBar()
-        initFABListener()    }
-
-    private fun initFABListener() {
-        binding.fab.setOnClickListener {
-            if (isMain) {
-                binding.bottomAppBar.navigationIcon = null
-                binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
-                binding.fab.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        this,
-                        R.drawable.ic_back_fab
-                    )
-                )
-                binding.bottomAppBar.replaceMenu(R.menu.menu_empty)
-            } else {
-                binding.bottomAppBar.navigationIcon = (ContextCompat.getDrawable(
-                    this,
-                    R.drawable.ic_hamburger_menu_bottom_bar
-                ))
-                binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
-                binding.fab.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        this,
-                        R.drawable.ic_plus_fab
-                    )
-                )
-                binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)
-            }
-            isMain = !isMain
-        }
+//        initMenuAppBar()
+//        initFABListener()
     }
 
-    private fun initMenuAppBar() {
-        this.setSupportActionBar(binding.bottomAppBar)
-        //setHasOptionsMenu(true)
-    }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_bottom_bar, menu)
-        return super.onCreateOptionsMenu(menu)
-
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.actionFavouriteAppBar -> {
-                //view?.showSnackBar(item.title.toString(), "", {}, Snackbar.LENGTH_SHORT)
-            }
-            R.id.actionSettingsAppBar -> {
-                //view?.showSnackBar(item.title.toString(), "", {}, Snackbar.LENGTH_SHORT)
-                this.supportFragmentManager.beginTransaction()
-                    .add(R.id.mainContainer, SettingsFragment.newInstance()).addToBackStack("")
-                    .commit()
-            }
-            R.id.actionExitAppBar -> {
-                exitProcess(0)
-            }
-            android.R.id.home -> {
-                BottomNavigationDrawerFragment.newInstance()
-                    .show(this.supportFragmentManager, "")
-            }
-
-        }
-        return super.onOptionsItemSelected(item)
-    }
 
     fun setCurrentTheme(currentTheme: Int) {
         val sharedPreferences = getSharedPreferences(KEY_SP, MODE_PRIVATE)

@@ -17,11 +17,11 @@
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/menu_space_bottom_navigation"
-        app:labelVisibilityMode="selected"
+        android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        app:labelVisibilityMode="selected"
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/menu_space_bottom_navigation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
