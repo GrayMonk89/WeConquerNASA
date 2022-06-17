@@ -5,8 +5,12 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.gb.weconquernasa.databinding.ActivityMainBinding
 import com.gb.weconquernasa.layout.LayoutFragment
+import com.gb.weconquernasa.layout.fragments.ConstraintFragment
+import com.gb.weconquernasa.layout.fragments.CoordinatorFragment
+import com.gb.weconquernasa.layout.fragments.MotionFragment
 import com.gb.weconquernasa.utils.*
 import com.gb.weconquernasa.view.navigation.MainViewPagerFragment
 import com.gb.weconquernasa.view.picture.BottomNavigationDrawerFragment
@@ -35,14 +39,44 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) {//PictureOfTheDayFragment.newInstance()
             supportFragmentManager.beginTransaction().replace(
                 R.id.mainContainer,
-                LayoutFragment.newInstance()
+                ConstraintFragment.newInstance()
             ).commit()
         }
-//        initMenuAppBar()
-//        initFABListener()
+        setFABListener()
+        initBottomNavigationView()
     }
 
 
+    private fun setFABListener() {
+        binding.fabExit.setOnClickListener() {
+            exitProcess(0)
+        }
+    }
+
+    private fun initBottomNavigationView() {
+        binding.bottomNavigation.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.actionBottomNavigationConstraint -> {
+                    navigationTo(ConstraintFragment())
+                    true
+                }
+                R.id.actionBottomNavigationCoordinator -> {
+                    navigationTo(CoordinatorFragment())
+                    true
+                }
+                R.id.actionBottomNavigationMotion -> {
+                    navigationTo(MotionFragment())
+                    true
+                }
+                else -> true
+            }
+        }
+        binding.bottomNavigation.selectedItemId = R.id.actionBottomNavigationConstraint
+    }
+
+    private fun navigationTo(f: Fragment) {
+        supportFragmentManager.beginTransaction().replace(R.id.mainContainer, f).commit()
+    }
 
     fun setCurrentTheme(currentTheme: Int) {
         val sharedPreferences = getSharedPreferences(KEY_SP, MODE_PRIVATE)

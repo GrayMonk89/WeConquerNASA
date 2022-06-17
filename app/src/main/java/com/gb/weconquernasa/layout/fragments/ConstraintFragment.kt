@@ -25,6 +25,20 @@ class ConstraintFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.materialButtonTop.setOnClickListener(){
+            binding.allButtonsGroup.visibility = View.GONE
+        }
+        binding.materialButtonMiddle.setOnClickListener(){
+            binding.topBottomButtonsGroup.visibility = View.GONE
+        }
+        binding.materialButtonBottom.setOnClickListener(){
+            binding.topMiddleButtonsGroup.visibility = View.GONE
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
