@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.gb.weconquernasa.R
 import com.gb.weconquernasa.databinding.FragmentLayoutBinding
-import com.gb.weconquernasa.layout.fragments.ConstraintFragment
-import com.gb.weconquernasa.layout.fragments.CoordinatorFragment
-import com.gb.weconquernasa.layout.fragments.MotionFragment
+import com.gb.weconquernasa.layout.constraint.ConstraintFragment
+import com.gb.weconquernasa.layout.coordinator.CoordinatorFragment
+import com.gb.weconquernasa.layout.motion.MotionFragment
 import kotlin.system.exitProcess
 
 class LayoutFragment : Fragment() {

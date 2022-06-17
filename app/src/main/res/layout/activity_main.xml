@@ -12,9 +12,10 @@
         android:layout_height="wrap_content"
         android:backgroundTint="?colorOnPrimary"
         android:contentDescription="@string/exit"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_exit" />
+        app:srcCompat="@drawable/ic_exit"
+        android:layout_marginTop="?actionBarSize"/>
 
     <FrameLayout
         android:id="@+id/mainContainer"

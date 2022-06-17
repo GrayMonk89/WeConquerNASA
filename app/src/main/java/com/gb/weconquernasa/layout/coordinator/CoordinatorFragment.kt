@@ -1,16 +1,17 @@
-package com.gb.weconquernasa.layout.fragments
+package com.gb.weconquernasa.layout.coordinator
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.gb.weconquernasa.R
-import com.gb.weconquernasa.databinding.FragmentConstraintBinding
+import com.gb.weconquernasa.databinding.FragmentCoordinatorBinding
 
-class ConstraintFragment : Fragment() {
-    private var _binding: FragmentConstraintBinding? = null
-    private val binding: FragmentConstraintBinding
+class CoordinatorFragment : Fragment() {
+
+    private var _binding:FragmentCoordinatorBinding? = null
+    private val binding:FragmentCoordinatorBinding
     get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,13 +22,8 @@ class ConstraintFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentConstraintBinding.inflate(inflater, container, false)
+        _binding = FragmentCoordinatorBinding.inflate(inflater, container, false)
         return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
     }
 
     override fun onDestroy() {
@@ -37,6 +33,6 @@ class ConstraintFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance() = ConstraintFragment()
+        fun newInstance() = CoordinatorFragment()
     }
 }

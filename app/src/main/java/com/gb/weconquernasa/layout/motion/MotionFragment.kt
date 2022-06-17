@@ -1,4 +1,4 @@
-package com.gb.weconquernasa.layout.fragments
+package com.gb.weconquernasa.layout.motion
 
 import android.os.Bundle
 import android.view.LayoutInflater

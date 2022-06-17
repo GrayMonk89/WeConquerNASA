@@ -1,21 +1,13 @@
 package com.gb.weconquernasa
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.gb.weconquernasa.databinding.ActivityMainBinding
-import com.gb.weconquernasa.layout.LayoutFragment
-import com.gb.weconquernasa.layout.fragments.ConstraintFragment
-import com.gb.weconquernasa.layout.fragments.CoordinatorFragment
-import com.gb.weconquernasa.layout.fragments.MotionFragment
+import com.gb.weconquernasa.layout.constraint.ConstraintFragment
+import com.gb.weconquernasa.layout.coordinator.CoordinatorFragment
+import com.gb.weconquernasa.layout.motion.MotionFragment
 import com.gb.weconquernasa.utils.*
-import com.gb.weconquernasa.view.navigation.MainViewPagerFragment
-import com.gb.weconquernasa.view.picture.BottomNavigationDrawerFragment
-import com.gb.weconquernasa.view.settings.SettingsFragment
-import com.google.android.material.bottomappbar.BottomAppBar
 import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {
@@ -71,7 +63,7 @@ class MainActivity : AppCompatActivity() {
                 else -> true
             }
         }
-        binding.bottomNavigation.selectedItemId = R.id.actionBottomNavigationConstraint
+        binding.bottomNavigation.selectedItemId = R.id.actionBottomNavigationCoordinator
     }
 
     private fun navigationTo(f: Fragment) {
