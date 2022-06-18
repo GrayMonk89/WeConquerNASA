@@ -50,24 +50,24 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.actionBottomNavigationConstraint -> {
+                    binding.fabExit.visibility = View.VISIBLE
                     navigationTo(ConstraintFragment())
                     true
                 }
                 R.id.actionBottomNavigationCoordinator -> {
+                    binding.fabExit.visibility = View.GONE
                     navigationTo(CoordinatorFragment())
                     true
                 }
                 R.id.actionBottomNavigationMotion -> {
+                    binding.fabExit.visibility = View.VISIBLE
                     navigationTo(MotionFragment())
                     true
                 }
                 else -> true
             }
         }
-        binding.bottomNavigation.selectedItemId = R.id.actionBottomNavigationCoordinator
-        if(binding.bottomNavigation.selectedItemId == R.id.actionBottomNavigationCoordinator){
-            binding.fabExit.visibility = View.GONE
-        }
+        binding.bottomNavigation.selectedItemId = R.id.actionBottomNavigationMotion
     }
 
     private fun navigationTo(f: Fragment) {
