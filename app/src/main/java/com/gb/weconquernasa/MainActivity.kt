@@ -1,6 +1,7 @@
 package com.gb.weconquernasa
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.gb.weconquernasa.databinding.ActivityMainBinding
@@ -64,6 +65,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
         binding.bottomNavigation.selectedItemId = R.id.actionBottomNavigationCoordinator
+        if(binding.bottomNavigation.selectedItemId == R.id.actionBottomNavigationCoordinator){
+            binding.fabExit.visibility = View.GONE
+        }
     }
 
     private fun navigationTo(f: Fragment) {

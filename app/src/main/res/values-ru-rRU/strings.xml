@@ -25,4 +25,5 @@
     <string name="mars">Марс</string>
     <string name="exit">Выход</string>
     <string name="plus">Плюс</string>
+    <string name="long_click_to_exit">Зажми и выйди</string>
 </resources>

@@ -5,8 +5,9 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.google.android.material.appbar.AppBarLayout
+import kotlin.math.abs
 
-class NestedBehavior(context: Context, attrs: AttributeSet? = null) :
+class AlphaBehavior(context: Context, attrs: AttributeSet? = null) :
     CoordinatorLayout.Behavior<View>(context, attrs) {
 
     override fun layoutDependsOn(
@@ -23,11 +24,10 @@ class NestedBehavior(context: Context, attrs: AttributeSet? = null) :
         dependency: View
     ): Boolean {
         if(dependency is AppBarLayout){
-                child.y = dependency.height.toFloat() + dependency.y
-        } else {
-
+            child.alpha = 1 - abs(2 * dependency.y) / dependency.height.toFloat()
+            child.x =
+                (dependency.width.toFloat() - child.width.toFloat()) * (1 - abs(2 * dependency.y) / dependency.height.toFloat())
         }
         return super.onDependentViewChanged(parent, child, dependency)
     }
-
 }
