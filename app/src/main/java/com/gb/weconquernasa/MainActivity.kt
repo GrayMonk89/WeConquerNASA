@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.gb.weconquernasa.animations.AnimationsFragment
 import com.gb.weconquernasa.databinding.ActivityMainBinding
 import com.gb.weconquernasa.layout.constraint.ConstraintFragment
 import com.gb.weconquernasa.layout.coordinator.CoordinatorFragment
@@ -64,10 +65,16 @@ class MainActivity : AppCompatActivity() {
                     navigationTo(MotionFragment())
                     true
                 }
+                R.id.actionBottomNavigationAnimations -> {
+                    binding.fabExit.visibility = View.VISIBLE
+                    navigationTo(AnimationsFragment())
+                    true
+                }
+
                 else -> true
             }
         }
-        binding.bottomNavigation.selectedItemId = R.id.actionBottomNavigationMotion
+        binding.bottomNavigation.selectedItemId = R.id.actionBottomNavigationAnimations
     }
 
     private fun navigationTo(f: Fragment) {

@@ -13,4 +13,8 @@
         android:id="@+id/actionBottomNavigationMotion"
         android:icon="@drawable/ic_mars"
         android:title="@string/motion" />
+    <item
+        android:id="@+id/actionBottomNavigationAnimations"
+        android:icon="@drawable/ic_animation"
+        android:title="@string/animations" />
 </menu>

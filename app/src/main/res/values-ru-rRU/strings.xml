@@ -26,4 +26,7 @@
     <string name="exit">Выход</string>
     <string name="plus">Плюс</string>
     <string name="long_click_to_exit">Зажми и выйди</string>
+    <string name="animations">Анимации</string>
+    <string name="first">Первый</string>
+    <string name="second">Второй</string>
 </resources>

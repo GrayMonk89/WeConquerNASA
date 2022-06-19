@@ -117,7 +117,8 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"</string>
     <string name="long_click_to_exit">Long click to exit</string>
-    <string name="first" translatable="false">First</string>
-    <string name="second" translatable="false">Second</string>
+    <string name="first">First</string>
+    <string name="second">Second</string>
+    <string name="animations">Animations</string>
 
 </resources>
