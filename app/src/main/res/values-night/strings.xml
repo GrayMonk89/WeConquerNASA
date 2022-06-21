@@ -7,4 +7,6 @@
     <string name="earth">Earth</string>
     <string name="system">System</string>
     <string name="mars">Mars</string>
+    <string name="transitions_example">Transitions example</string>
+    <string name="animate">Animate</string>
 </resources>
