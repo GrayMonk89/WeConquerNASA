@@ -29,6 +29,6 @@
     <string name="animations">Анимации</string>
     <string name="first">Первый</string>
     <string name="second">Второй</string>
-    <string name="transitions_example">Transitions example</string>
-    <string name="animate">Animate</string>
+    <string name="transitions_example">пример Transitions</string>
+    <string name="animate">Анимировать</string>
 </resources>

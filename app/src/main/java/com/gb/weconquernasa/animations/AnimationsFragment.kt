@@ -1,14 +1,12 @@
 package com.gb.weconquernasa.animations
 
 import android.os.Bundle
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.transition.ChangeBounds
-import androidx.transition.Fade
-import androidx.transition.TransitionManager
-import androidx.transition.TransitionSet
+import androidx.transition.*
 import com.gb.weconquernasa.R
 import com.gb.weconquernasa.databinding.FragmentAnimationsBinding
 
@@ -53,11 +51,15 @@ class AnimationsFragment : Fragment() {
     private fun initTransitionManager() {
         val transitionFade = Fade()
         transitionFade.duration = 1500
+        val transitionSlide = Slide(Gravity.END)
+        transitionSlide.duration = 1500
         val transitionChangeBounds = ChangeBounds()
         transitionChangeBounds.duration = 2500
         val transitionSet = TransitionSet()
-        transitionSet.addTransition(transitionFade)
-        transitionSet.addTransition(transitionChangeBounds)
+        transitionSet
+            .addTransition(transitionFade)
+            .addTransition(transitionChangeBounds)
+            .addTransition(transitionSlide)
         TransitionManager.beginDelayedTransition(binding.transitionsContainer, transitionSet)
     }
 
