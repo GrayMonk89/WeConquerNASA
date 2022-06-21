@@ -1,21 +1,20 @@
 package com.gb.weconquernasa.animations
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.ObjectAnimator
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
-import androidx.transition.ArcMotion
-import androidx.transition.ChangeBounds
-import androidx.transition.TransitionManager
 import com.gb.weconquernasa.databinding.FragmentAnimationsBinding
 
 
 class AnimationsFragment : Fragment() {
 
     private var isOpen: Boolean = false
+    private val duration = 1000L
 
     private var _binding: FragmentAnimationsBinding? = null
     private val binding: FragmentAnimationsBinding
@@ -32,33 +31,85 @@ class AnimationsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initMotionButtonListener()
-    }
-
-    private fun initMotionButtonListener() {
-        binding.buttonMotion.setOnClickListener {
+        binding.fab.setOnClickListener {
             isOpen = !isOpen
+            if (isOpen) {
+                ObjectAnimator.ofFloat(binding.plusImageview, View.ROTATION, 0f, 180f).setDuration(duration).start()
+                ObjectAnimator.ofFloat(binding.optionOneContainer, View.TRANSLATION_Y, -130f).setDuration(duration).start()
+                ObjectAnimator.ofFloat(binding.optionTwoContainer, View.TRANSLATION_Y,  -220f).setDuration(duration+500).start()
+                ObjectAnimator.ofFloat(binding.optionThreeContainer, View.TRANSLATION_Y,  -300f).setDuration(duration+1000).start()
 
-            val params = (binding.buttonMotion.layoutParams as FrameLayout.LayoutParams)
+                binding.optionOneContainer.animate()
+                    .alpha(1f)
+                    .setDuration(duration / 2)
+                    .setListener(object : AnimatorListenerAdapter() {
+                        override fun onAnimationEnd(animation: Animator?) {
+                            super.onAnimationEnd(animation)
+                            binding.optionOneContainer.isClickable = true
+                        }
+                    })
+                binding.optionTwoContainer.animate()
+                    .alpha(1f)
+                    .setDuration(duration / 2)
+                    .setListener(object : AnimatorListenerAdapter() {
+                        override fun onAnimationEnd(animation: Animator?) {
+                            super.onAnimationEnd(animation)
+                            binding.optionTwoContainer.isClickable = true
+                        }
+                    })
+                binding.optionThreeContainer.animate()
+                    .alpha(1f)
+                    .setDuration(duration / 2)
+                    .setListener(object : AnimatorListenerAdapter() {
+                        override fun onAnimationEnd(animation: Animator?) {
+                            super.onAnimationEnd(animation)
+                            binding.optionThreeContainer.isClickable = true
+                        }
+                    })
 
-            params.gravity = if (isOpen) {
-                setPath(90f, 4000)
-                Gravity.CENTER or Gravity.END
+                binding.transparentBackground.animate()
+                    .alpha(0.5f)
+                    .setDuration(duration)
+
             } else {
-                setPath(10f, 1500)
-                Gravity.TOP or Gravity.START
-            }
-            binding.buttonMotion.layoutParams = params
-        }
-    }
+                ObjectAnimator.ofFloat(binding.plusImageview, View.ROTATION, 180f, 0f).setDuration(duration).start()
+                ObjectAnimator.ofFloat(binding.optionOneContainer, View.TRANSLATION_Y, 0f).setDuration(duration).start()
+                ObjectAnimator.ofFloat(binding.optionTwoContainer, View.TRANSLATION_Y,  0f).setDuration(duration+500).start()
+                ObjectAnimator.ofFloat(binding.optionThreeContainer, View.TRANSLATION_Y,  0f).setDuration(duration+1000).start()
 
-    private fun setPath(maximumAngle: Float, duration: Long) {
-        val transition = ChangeBounds()
-        val path = ArcMotion()
-        path.maximumAngle = maximumAngle
-        transition.setPathMotion(path)
-        transition.duration = duration
-        TransitionManager.beginDelayedTransition(binding.root, transition)
+                binding.optionOneContainer.animate()
+                    .alpha(0f)
+                    .setDuration(duration / 2)
+                    .setListener(object : AnimatorListenerAdapter() {
+                        override fun onAnimationEnd(animation: Animator?) {
+                            super.onAnimationEnd(animation)
+                            binding.optionOneContainer.isClickable = false
+                        }
+                    })
+                binding.optionTwoContainer.animate()
+                    .alpha(0f)
+                    .setDuration(duration / 2)
+                    .setListener(object : AnimatorListenerAdapter() {
+                        override fun onAnimationEnd(animation: Animator?) {
+                            super.onAnimationEnd(animation)
+                            binding.optionTwoContainer.isClickable = false
+                        }
+                    })
+                binding.optionThreeContainer.animate()
+                    .alpha(0f)
+                    .setDuration(duration / 2)
+                    .setListener(object : AnimatorListenerAdapter() {
+                        override fun onAnimationEnd(animation: Animator?) {
+                            super.onAnimationEnd(animation)
+                            binding.optionThreeContainer.isClickable = false
+                        }
+                    })
+                binding.transparentBackground.animate()
+                    .alpha(0f)
+                    .setDuration(duration)
+
+            }
+        }
     }
 
     override fun onDestroy() {
