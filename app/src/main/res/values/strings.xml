@@ -123,5 +123,6 @@
     <string name="transitions_example">Transitions example</string>
     <string name="animate">Animate</string>
     <string name="tap_on_me">TAP ON ME</string>
+    <string name="button">button</string>
 
 </resources>
