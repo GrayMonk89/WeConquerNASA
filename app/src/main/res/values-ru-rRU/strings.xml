@@ -31,4 +31,5 @@
     <string name="second">Второй</string>
     <string name="transitions_example">пример Transitions</string>
     <string name="animate">Анимировать</string>
+    <string name="tap_on_me">Нажми меня</string>
 </resources>
