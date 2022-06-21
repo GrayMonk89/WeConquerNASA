@@ -7,9 +7,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.transition.ChangeBounds
+import androidx.transition.ChangeImageTransform
+import androidx.transition.TransitionManager
+import androidx.transition.TransitionSet
 import coil.load
 import com.gb.weconquernasa.R
 import com.gb.weconquernasa.databinding.FragmentPictureOfTheDayBinding
@@ -27,7 +33,7 @@ import java.util.*
 
 class PictureOfTheDayFragment : Fragment() {
 
-
+    var isOpen: Boolean = false
 
     private var _binding: FragmentPictureOfTheDayBinding? = null
     private val binding: FragmentPictureOfTheDayBinding
@@ -56,10 +62,43 @@ class PictureOfTheDayFragment : Fragment() {
         initViewModel()
         initEndIconListener()
         initSheetBehavior()
-
         initTabsListener()
 
+        initImageViewListener()
 
+    }
+
+    private fun initImageViewListener() {
+        binding.imageView.setOnClickListener {
+            isOpen = !isOpen
+
+            initTransitionManager()
+
+            binding.imageView.scaleType = if (isOpen) {
+                ImageView.ScaleType.CENTER_CROP
+            } else {
+                ImageView.ScaleType.CENTER_INSIDE
+            }
+
+            val params = (binding.imageView.layoutParams as CoordinatorLayout.LayoutParams)
+            params.height = if (isOpen) {
+                CoordinatorLayout.LayoutParams.MATCH_PARENT
+            } else {
+                CoordinatorLayout.LayoutParams.WRAP_CONTENT
+            }
+            binding.imageView.layoutParams = params
+        }
+    }
+
+    private fun initTransitionManager() {
+        val transitionChangeBounds = ChangeBounds().setDuration(1500)
+        val transitionImage = ChangeImageTransform().setDuration(1500)
+
+        val transitionSet = TransitionSet()
+            .addTransition(transitionChangeBounds)
+            .addTransition(transitionImage)
+
+        TransitionManager.beginDelayedTransition(binding.root, transitionSet)
     }
 
     private fun initTabsListener() {
@@ -89,7 +128,6 @@ class PictureOfTheDayFragment : Fragment() {
             }
         })
     }
-
 
 
     private fun initSheetBehavior() {

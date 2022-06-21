@@ -10,6 +10,7 @@ import com.gb.weconquernasa.layout.constraint.ConstraintFragment
 import com.gb.weconquernasa.layout.coordinator.CoordinatorFragment
 import com.gb.weconquernasa.layout.motion.MotionFragment
 import com.gb.weconquernasa.utils.*
+import com.gb.weconquernasa.view.picture.PictureOfTheDayFragment
 import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {
@@ -67,7 +68,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.actionBottomNavigationAnimations -> {
                     binding.fabExit.visibility = View.VISIBLE
-                    navigationTo(AnimationsFragment())
+                    navigationTo(PictureOfTheDayFragment())
                     true
                 }
 
