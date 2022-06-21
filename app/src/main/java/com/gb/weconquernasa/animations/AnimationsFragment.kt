@@ -1,21 +1,21 @@
 package com.gb.weconquernasa.animations
 
-import android.graphics.Rect
 import android.os.Bundle
 import android.view.Gravity
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import androidx.transition.*
-import com.gb.weconquernasa.R
+import android.widget.FrameLayout
+import androidx.fragment.app.Fragment
+import androidx.transition.ArcMotion
+import androidx.transition.ChangeBounds
+import androidx.transition.TransitionManager
 import com.gb.weconquernasa.databinding.FragmentAnimationsBinding
 
 
 class AnimationsFragment : Fragment() {
 
-    var isOpen: Boolean = false
+    private var isOpen: Boolean = false
 
     private var _binding: FragmentAnimationsBinding? = null
     private val binding: FragmentAnimationsBinding
@@ -32,46 +32,34 @@ class AnimationsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
-        binding.recyclerView.adapter = Adapter()
-
+        initMotionButtonListener()
     }
 
-    inner class Adapter : RecyclerView.Adapter<ViewHolder>() {
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            return ViewHolder(
-                LayoutInflater.from(parent.context)
-                    .inflate(R.layout.fragment_animations_recycler_item, parent, false) as View
-            )
-        }
+    private fun initMotionButtonListener() {
+        binding.buttonMotion.setOnClickListener {
+            isOpen = !isOpen
 
-        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            holder.itemView.setOnClickListener { button ->
-                val epicenterExplode = Rect()
-                button.getGlobalVisibleRect(epicenterExplode)
-                val transitionExplode = Explode()
-                transitionExplode.epicenterCallback = object : Transition.EpicenterCallback() {
-                    override fun onGetEpicenter(transition: Transition): Rect {
-                        return epicenterExplode
-                    }
-                }
-                transitionExplode.duration = 2500
-                transitionExplode.excludeTarget(button, true)
-                val transitionFade = Fade().addTarget(button).setDuration(3000)
-                val transitionSet = TransitionSet().addTransition(transitionExplode).addTransition(transitionFade)
-                TransitionManager.beginDelayedTransition(binding.recyclerView, transitionSet)
-                binding.recyclerView.adapter = null
+            val params = (binding.buttonMotion.layoutParams as FrameLayout.LayoutParams)
+
+            params.gravity = if (isOpen) {
+                setPath(90f, 4000)
+                Gravity.CENTER or Gravity.END
+            } else {
+                setPath(10f, 1500)
+                Gravity.TOP or Gravity.START
             }
+            binding.buttonMotion.layoutParams = params
         }
-
-        override fun getItemCount(): Int {
-            return 24
-        }
-
     }
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
+    private fun setPath(maximumAngle: Float, duration: Long) {
+        val transition = ChangeBounds()
+        val path = ArcMotion()
+        path.maximumAngle = maximumAngle
+        transition.setPathMotion(path)
+        transition.duration = duration
+        TransitionManager.beginDelayedTransition(binding.root, transition)
+    }
 
     override fun onDestroy() {
         super.onDestroy()

@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.actionBottomNavigationAnimations -> {
                     binding.fabExit.visibility = View.VISIBLE
-                    navigationTo(PictureOfTheDayFragment())
+                    navigationTo(AnimationsFragment())
                     true
                 }
 
