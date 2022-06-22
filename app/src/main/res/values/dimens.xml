@@ -6,4 +6,5 @@
     <dimen name="bottom_sheet_margin_top_title">5dp</dimen>
     <dimen name="bottom_navigation_icon_size">20dp</dimen>
     <dimen name="text_margin">20dp</dimen>
+    <dimen name="radius">100dp</dimen>
 </resources>
