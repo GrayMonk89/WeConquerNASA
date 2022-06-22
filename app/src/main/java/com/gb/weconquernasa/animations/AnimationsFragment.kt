@@ -13,9 +13,6 @@ import com.gb.weconquernasa.databinding.FragmentAnimationsBinding
 
 class AnimationsFragment : Fragment() {
 
-    private var isOpen: Boolean = false
-    private val duration = 1000L
-
     private var _binding: FragmentAnimationsBinding? = null
     private val binding: FragmentAnimationsBinding
         get() = _binding!!
@@ -30,85 +27,11 @@ class AnimationsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+//        binding.header.isSelected = true
+//        binding.header.isSelected = false
 
-        binding.fab.setOnClickListener {
-            isOpen = !isOpen
-            if (isOpen) {
-                ObjectAnimator.ofFloat(binding.plusImageview, View.ROTATION, 0f, 180f).setDuration(duration).start()
-                ObjectAnimator.ofFloat(binding.optionOneContainer, View.TRANSLATION_Y, -130f).setDuration(duration).start()
-                ObjectAnimator.ofFloat(binding.optionTwoContainer, View.TRANSLATION_Y,  -220f).setDuration(duration+500).start()
-                ObjectAnimator.ofFloat(binding.optionThreeContainer, View.TRANSLATION_Y,  -300f).setDuration(duration+1000).start()
-
-                binding.optionOneContainer.animate()
-                    .alpha(1f)
-                    .setDuration(duration / 2)
-                    .setListener(object : AnimatorListenerAdapter() {
-                        override fun onAnimationEnd(animation: Animator?) {
-                            super.onAnimationEnd(animation)
-                            binding.optionOneContainer.isClickable = true
-                        }
-                    })
-                binding.optionTwoContainer.animate()
-                    .alpha(1f)
-                    .setDuration(duration / 2)
-                    .setListener(object : AnimatorListenerAdapter() {
-                        override fun onAnimationEnd(animation: Animator?) {
-                            super.onAnimationEnd(animation)
-                            binding.optionTwoContainer.isClickable = true
-                        }
-                    })
-                binding.optionThreeContainer.animate()
-                    .alpha(1f)
-                    .setDuration(duration / 2)
-                    .setListener(object : AnimatorListenerAdapter() {
-                        override fun onAnimationEnd(animation: Animator?) {
-                            super.onAnimationEnd(animation)
-                            binding.optionThreeContainer.isClickable = true
-                        }
-                    })
-
-                binding.transparentBackground.animate()
-                    .alpha(0.5f)
-                    .setDuration(duration)
-
-            } else {
-                ObjectAnimator.ofFloat(binding.plusImageview, View.ROTATION, 180f, 0f).setDuration(duration).start()
-                ObjectAnimator.ofFloat(binding.optionOneContainer, View.TRANSLATION_Y, 0f).setDuration(duration).start()
-                ObjectAnimator.ofFloat(binding.optionTwoContainer, View.TRANSLATION_Y,  0f).setDuration(duration+500).start()
-                ObjectAnimator.ofFloat(binding.optionThreeContainer, View.TRANSLATION_Y,  0f).setDuration(duration+1000).start()
-
-                binding.optionOneContainer.animate()
-                    .alpha(0f)
-                    .setDuration(duration / 2)
-                    .setListener(object : AnimatorListenerAdapter() {
-                        override fun onAnimationEnd(animation: Animator?) {
-                            super.onAnimationEnd(animation)
-                            binding.optionOneContainer.isClickable = false
-                        }
-                    })
-                binding.optionTwoContainer.animate()
-                    .alpha(0f)
-                    .setDuration(duration / 2)
-                    .setListener(object : AnimatorListenerAdapter() {
-                        override fun onAnimationEnd(animation: Animator?) {
-                            super.onAnimationEnd(animation)
-                            binding.optionTwoContainer.isClickable = false
-                        }
-                    })
-                binding.optionThreeContainer.animate()
-                    .alpha(0f)
-                    .setDuration(duration / 2)
-                    .setListener(object : AnimatorListenerAdapter() {
-                        override fun onAnimationEnd(animation: Animator?) {
-                            super.onAnimationEnd(animation)
-                            binding.optionThreeContainer.isClickable = false
-                        }
-                    })
-                binding.transparentBackground.animate()
-                    .alpha(0f)
-                    .setDuration(duration)
-
-            }
+        binding.scrollView.setOnScrollChangeListener { _, _, _, _, _ ->
+            binding.header.isSelected = binding.scrollView.canScrollVertically(-1)
         }
     }
 
