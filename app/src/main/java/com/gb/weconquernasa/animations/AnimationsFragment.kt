@@ -15,7 +15,7 @@ import com.gb.weconquernasa.databinding.FragmentAnimationsBonusStartBinding
 
 class AnimationsFragment : Fragment() {
 
-    private val duration: Long = 1000
+    private val duration: Long = 2000
     var isOpen: Boolean = false
 
     private var _binding: FragmentAnimationsBonusStartBinding? = null
@@ -39,20 +39,31 @@ class AnimationsFragment : Fragment() {
 
     private fun initShowPhotoDetails() {
         binding.backgroundImage.setOnClickListener {
-
             val constraintSet = ConstraintSet()
+            constraintSet.clone(binding.constraintContainer)
+
             val transition = ChangeBounds()
-            transition.interpolator = AnticipateOvershootInterpolator(20f)
-            transition.duration = duration
+            transition.interpolator = AnticipateOvershootInterpolator(5f)
+            transition.duration = 1000
             TransitionManager.beginDelayedTransition(binding.constraintContainer,transition)
+
             isOpen = !isOpen
-            if (isOpen) {
-                constraintSet.clone(requireContext(), R.layout.fragment_animations_bonus_end)
-            } else {
-                constraintSet.clone(requireContext(), R.layout.fragment_animations_bonus_start)
+            if(isOpen){
+                constraintSet.clear(R.id.description, ConstraintSet.BOTTOM)
+                constraintSet.clear(R.id.description, ConstraintSet.TOP)
+                constraintSet.connect(R.id.title,ConstraintSet.END,R.id.backgroundImage,ConstraintSet.END)
+                constraintSet.connect(R.id.description,ConstraintSet.BOTTOM,R.id.backgroundImage,ConstraintSet.BOTTOM)
+            }else{
+                constraintSet.clear(R.id.description, ConstraintSet.BOTTOM)
+                constraintSet.clear(R.id.description, ConstraintSet.TOP)
+                constraintSet.connect(R.id.title,ConstraintSet.END,R.id.backgroundImage,ConstraintSet.START)
+                constraintSet.connect(R.id.description,ConstraintSet.TOP,R.id.backgroundImage,ConstraintSet.BOTTOM)
+
             }
             constraintSet.applyTo(binding.constraintContainer)
         }
+
+
     }
 
     override fun onDestroy() {
