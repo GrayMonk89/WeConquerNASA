@@ -10,11 +10,9 @@ import com.gb.weconquernasa.layout.constraint.ConstraintFragment
 import com.gb.weconquernasa.layout.coordinator.CoordinatorFragment
 import com.gb.weconquernasa.layout.motion.MotionFragment
 import com.gb.weconquernasa.utils.*
-import com.gb.weconquernasa.view.picture.PictureOfTheDayFragment
 import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {
-
 
 
     private var _binding: ActivityMainBinding? = null
@@ -79,7 +77,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun navigationTo(f: Fragment) {
-        supportFragmentManager.beginTransaction().replace(R.id.mainContainer, f).commit()
+        supportFragmentManager.beginTransaction().setCustomAnimations(
+            R.anim.slide_in_left,
+            R.anim.slide_out_left,
+            R.anim.slide_in_right,
+            R.anim.slide_out_right
+        ).replace(R.id.mainContainer, f).commit()
     }
 
     fun setCurrentTheme(currentTheme: Int) {

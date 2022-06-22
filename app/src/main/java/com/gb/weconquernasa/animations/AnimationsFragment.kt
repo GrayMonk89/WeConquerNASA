@@ -33,8 +33,8 @@ class AnimationsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         initShowPhotoDetails()
+
     }
 
     private fun initShowPhotoDetails() {
@@ -58,12 +58,9 @@ class AnimationsFragment : Fragment() {
                 constraintSet.clear(R.id.description, ConstraintSet.TOP)
                 constraintSet.connect(R.id.title,ConstraintSet.END,R.id.backgroundImage,ConstraintSet.START)
                 constraintSet.connect(R.id.description,ConstraintSet.TOP,R.id.backgroundImage,ConstraintSet.BOTTOM)
-
             }
             constraintSet.applyTo(binding.constraintContainer)
         }
-
-
     }
 
     override fun onDestroy() {
