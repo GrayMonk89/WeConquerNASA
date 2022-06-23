@@ -58,7 +58,7 @@ class AnimationsFragment : Fragment() {
         transitionSet.addTransition(transitionCB)
         transitionSet.addTransition(transitionFade)
         //transitionSet.addTransition(transitionSlide)
-        transitionSet.interpolator = AnticipateOvershootInterpolator(5f)
+        transitionSet.interpolator = AnticipateOvershootInterpolator(2f)
         transitionSet.duration = 1000
         TransitionManager.beginDelayedTransition(binding.anim.container, transitionSet)
     }

@@ -17,4 +17,8 @@
         android:id="@+id/actionBottomNavigationAnimations"
         android:icon="@drawable/ic_animation"
         android:title="@string/animations" />
+    <item
+        android:id="@+id/actionBottomNavigationRecycler"
+        android:icon="@drawable/ic_animation"
+        android:title="@string/recycler" />
 </menu>

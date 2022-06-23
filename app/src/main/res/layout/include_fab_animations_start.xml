@@ -28,7 +28,7 @@
         android:visibility="invisible"
         app:layout_constraintCircle="@id/fabCenter"
         app:layout_constraintCircleAngle="270"
-        app:layout_constraintCircleRadius="@dimen/radius"
+        app:layout_constraintCircleRadius="@dimen/radius_start"
         tools:ignore="MissingConstraints" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -40,7 +40,7 @@
         android:visibility="invisible"
         app:layout_constraintCircle="@id/fabCenter"
         app:layout_constraintCircleAngle="270"
-        app:layout_constraintCircleRadius="@dimen/radius"
+        app:layout_constraintCircleRadius="@dimen/radius_start"
         tools:ignore="MissingConstraints" />
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab3"
@@ -51,7 +51,7 @@
         android:visibility="invisible"
         app:layout_constraintCircle="@id/fabCenter"
         app:layout_constraintCircleAngle="270"
-        app:layout_constraintCircleRadius="@dimen/radius"
+        app:layout_constraintCircleRadius="@dimen/radius_start"
         tools:ignore="MissingConstraints" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -63,7 +63,7 @@
         android:visibility="invisible"
         app:layout_constraintCircle="@id/fabCenter"
         app:layout_constraintCircleAngle="270"
-        app:layout_constraintCircleRadius="@dimen/radius"
+        app:layout_constraintCircleRadius="@dimen/radius_start"
         tools:ignore="MissingConstraints" />
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab5"
@@ -74,6 +74,7 @@
         android:visibility="invisible"
         app:layout_constraintCircle="@id/fabCenter"
         app:layout_constraintCircleAngle="270"
-        app:layout_constraintCircleRadius="@dimen/radius"
+        app:layout_constraintCircleRadius="@dimen/radius_start"
         tools:ignore="MissingConstraints" />
+<!--  поправил радиус старта, стало лучше -->
 </androidx.constraintlayout.widget.ConstraintLayout>

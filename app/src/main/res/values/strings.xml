@@ -129,5 +129,6 @@
     <string name="tap" translatable="false">Показать описание</string>
     <string name="title">Кратер Даниэлсона</string>
     <string name="date_5_2018">5 июня 2018 г.</string>
+    <string name="recycler">Recycler</string>
 
 </resources>

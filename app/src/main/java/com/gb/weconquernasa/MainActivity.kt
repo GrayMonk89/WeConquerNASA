@@ -9,7 +9,9 @@ import com.gb.weconquernasa.databinding.ActivityMainBinding
 import com.gb.weconquernasa.layout.constraint.ConstraintFragment
 import com.gb.weconquernasa.layout.coordinator.CoordinatorFragment
 import com.gb.weconquernasa.layout.motion.MotionFragment
+import com.gb.weconquernasa.recycler.RecyclerFragment
 import com.gb.weconquernasa.utils.*
+import com.gb.weconquernasa.view.picture.PictureOfTheDayFragment
 import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {
@@ -51,7 +53,7 @@ class MainActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.actionBottomNavigationConstraint -> {
                     binding.fabExit.visibility = View.VISIBLE
-                    navigationTo(ConstraintFragment())
+                    navigationTo(PictureOfTheDayFragment())
                     true
                 }
                 R.id.actionBottomNavigationCoordinator -> {
@@ -69,19 +71,23 @@ class MainActivity : AppCompatActivity() {
                     navigationTo(AnimationsFragment())
                     true
                 }
+                R.id.actionBottomNavigationRecycler -> {
+                    binding.fabExit.visibility = View.VISIBLE
+                    navigationTo(RecyclerFragment())
+                    true
+                }
 
                 else -> true
             }
         }
-        binding.bottomNavigation.selectedItemId = R.id.actionBottomNavigationAnimations
+        binding.bottomNavigation.selectedItemId = R.id.actionBottomNavigationRecycler
     }
 
     private fun navigationTo(f: Fragment) {
         supportFragmentManager.beginTransaction().setCustomAnimations(
             R.anim.slide_in_left,
-            R.anim.slide_out_left,
-            R.anim.slide_in_right,
-            R.anim.slide_out_right
+            R.anim.slide_out_right,
+
         ).replace(R.id.mainContainer, f).commit()
     }
 

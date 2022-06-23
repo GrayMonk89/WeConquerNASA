@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -187,6 +188,7 @@ class PictureOfTheDayFragment : Fragment() {
             is PictureOfTheDayAppState.Error -> {}
             is PictureOfTheDayAppState.Loading -> {}
             is PictureOfTheDayAppState.Success -> {
+
                 binding.imageView.load(pictureOfTheDayAppState.pictureOfTheDayResponseData.url) {
                     crossfade(true)
                     placeholder(R.drawable.load)
@@ -195,6 +197,7 @@ class PictureOfTheDayFragment : Fragment() {
                     pictureOfTheDayAppState.pictureOfTheDayResponseData.title
                 binding.lifeHackBehavior.explanation.text =
                     pictureOfTheDayAppState.pictureOfTheDayResponseData.explanation
+
             }
         }
     }
