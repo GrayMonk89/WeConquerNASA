@@ -36,4 +36,6 @@
     <string name="descriptionFoto">На фото видно камни и песок в кратере Даниэлсона (диаметр кратера около 67 км), расположенного на юго-востоке области Arabia Terra.</string>
     <string name="title">Кратер Даниэлсона</string>
     <string name="date_5_2018">5 июня 2018 г.</string>
+    <string name="recycler">Recycler</string>
+    <string name="header">Заголовок</string>
 </resources>

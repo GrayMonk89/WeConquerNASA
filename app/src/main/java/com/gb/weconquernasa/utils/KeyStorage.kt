@@ -19,11 +19,15 @@ const val SUN_DEFAULT_VALUE = 0
 const val EARTH_DEFAULT_VALUE = 3
 const val MARS_DEFAULT_VALUE = 4
 const val SOLAR_SYSTEM_DEFAULT_VALUE = 9
+const val HEADER_DEFAULT_VALUE = -1
 
+
+const val HEADER_DEFAULT_NAME = "HEADER"
 const val SUN_DEFAULT_NAME = "SUN"
 const val EARTH_DEFAULT_NAME = "Earth"
 const val MARS_DEFAULT_NAME = "Mars"
 
+const val EMPTY_DEFAULT_DESCRIPTION = ""
 const val SUN_DEFAULT_DESCRIPTION = "Center of our solar system"
 const val EARTH_DEFAULT_DESCRIPTION = "Third planet from the sun"
 const val MARS_DEFAULT_DESCRIPTION = "Fourth planet from the sun"
