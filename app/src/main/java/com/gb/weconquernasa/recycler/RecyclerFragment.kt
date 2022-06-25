@@ -5,10 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.gb.weconquernasa.R
 import com.gb.weconquernasa.databinding.FragmentRecyclerBinding
 import com.gb.weconquernasa.utils.*
-import kotlin.math.E
 
 class RecyclerFragment : Fragment(), OnListItemClickListener {
 
@@ -20,17 +18,17 @@ class RecyclerFragment : Fragment(), OnListItemClickListener {
 
 
     private val list = mutableListOf(
-        Data(HEADER_DEFAULT_NAME, EMPTY_DEFAULT_DESCRIPTION, HEADER_DEFAULT_VALUE),
-        Data(SUN_DEFAULT_NAME, SUN_DEFAULT_DESCRIPTION, SUN_DEFAULT_VALUE),
-        Data(EARTH_DEFAULT_NAME, EARTH_DEFAULT_DESCRIPTION, EARTH_DEFAULT_VALUE),
-        Data(SUN_DEFAULT_NAME, SUN_DEFAULT_DESCRIPTION, SUN_DEFAULT_VALUE),
-        Data(EARTH_DEFAULT_NAME, EARTH_DEFAULT_DESCRIPTION, EARTH_DEFAULT_VALUE),
-        Data(EARTH_DEFAULT_NAME, EARTH_DEFAULT_DESCRIPTION, EARTH_DEFAULT_VALUE),
-        Data(MARS_DEFAULT_NAME, MARS_DEFAULT_DESCRIPTION, MARS_DEFAULT_VALUE),
-        Data(EARTH_DEFAULT_NAME, EARTH_DEFAULT_DESCRIPTION, EARTH_DEFAULT_VALUE),
-        Data(SUN_DEFAULT_NAME, SUN_DEFAULT_DESCRIPTION, SUN_DEFAULT_VALUE),
-        Data(EARTH_DEFAULT_NAME, EARTH_DEFAULT_DESCRIPTION, EARTH_DEFAULT_VALUE),
-        Data(MARS_DEFAULT_NAME, EARTH_DEFAULT_DESCRIPTION, MARS_DEFAULT_VALUE)
+        Pair(Data(HEADER_DEFAULT_NAME, EMPTY_DEFAULT_DESCRIPTION, HEADER_DEFAULT_VALUE), false),
+        Pair(Data(SUN_DEFAULT_NAME, SUN_DEFAULT_DESCRIPTION, SUN_DEFAULT_VALUE), false),
+        Pair(Data(EARTH_DEFAULT_NAME, EARTH_DEFAULT_DESCRIPTION, EARTH_DEFAULT_VALUE), false),
+        Pair(Data(SUN_DEFAULT_NAME, SUN_DEFAULT_DESCRIPTION, SUN_DEFAULT_VALUE), false),
+        Pair(Data(EARTH_DEFAULT_NAME, EARTH_DEFAULT_DESCRIPTION, EARTH_DEFAULT_VALUE), false),
+        Pair(Data(EARTH_DEFAULT_NAME, EARTH_DEFAULT_DESCRIPTION, EARTH_DEFAULT_VALUE), false),
+        Pair(Data(MARS_DEFAULT_NAME, MARS_DEFAULT_DESCRIPTION, MARS_DEFAULT_VALUE), false),
+        Pair(Data(EARTH_DEFAULT_NAME, EARTH_DEFAULT_DESCRIPTION, EARTH_DEFAULT_VALUE), false),
+        Pair(Data(SUN_DEFAULT_NAME, SUN_DEFAULT_DESCRIPTION, SUN_DEFAULT_VALUE), false),
+        Pair(Data(EARTH_DEFAULT_NAME, EARTH_DEFAULT_DESCRIPTION, EARTH_DEFAULT_VALUE), false),
+        Pair(Data(MARS_DEFAULT_NAME, EARTH_DEFAULT_DESCRIPTION, MARS_DEFAULT_VALUE), false)
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,17 +65,17 @@ class RecyclerFragment : Fragment(), OnListItemClickListener {
 
     }
 
-    override fun onAddBtnClick(data: Data, position: Int) {
+    override fun onAddBtnClick(data: Pair<Data, Boolean>, position: Int) {
 
-        when (data.type) {
+        when (data.first.type) {
             SUN_DEFAULT_VALUE -> {
-                list.add(position, Data("Sun", "Sun des", SUN_DEFAULT_VALUE))
+                list.add(position, Pair(Data("Sun", "Sun des", SUN_DEFAULT_VALUE), false))
             }
             EARTH_DEFAULT_VALUE -> {
-                list.add(position, Data("Earth", "Earth des", EARTH_DEFAULT_VALUE))
+                list.add(position, Pair(Data("Earth", "Earth des", EARTH_DEFAULT_VALUE),false))
             }
             MARS_DEFAULT_VALUE -> {
-                list.add(position, Data("Mars", "Mars des", MARS_DEFAULT_VALUE))
+                list.add(position, Pair(Data("Mars", "Mars des", MARS_DEFAULT_VALUE),false))
             }
         }
         adapter.setAddToList(list, position)
@@ -98,7 +96,7 @@ class RecyclerFragment : Fragment(), OnListItemClickListener {
     }
 
     override fun moveItemDown(position: Int) {
-        if (position != list.size-1) {
+        if (position != list.size - 1) {
             list.removeAt(position).apply {
                 list.add(position + 1, this)
             }
