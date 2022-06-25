@@ -10,21 +10,22 @@ import com.gb.weconquernasa.R
 import com.gb.weconquernasa.databinding.*
 import com.gb.weconquernasa.utils.*
 
-class RecyclerFragmentAdapter(private var onListItemClickListener: OnListItemClickListener) : RecyclerView.Adapter<BaseViewHolder>() {
+class RecyclerFragmentAdapter(private var onListItemClickListener: OnListItemClickListener) :
+    RecyclerView.Adapter<BaseViewHolder>() {
 
-    private lateinit var list: List<Data>
+    private lateinit var list: MutableList<Data>
 
     fun setList(newList: List<Data>) {
-        this.list = newList
+        this.list = newList.toMutableList()
     }
 
     fun setAddToList(newList: List<Data>, position: Int) {
-        this.list = newList
+        this.list = newList.toMutableList()
         notifyItemChanged(position)
     }
 
     fun setRemoveToList(newList: List<Data>, position: Int) {
-        this.list = newList
+        this.list = newList.toMutableList()
         notifyItemRemoved(position)
     }
 
@@ -35,12 +36,14 @@ class RecyclerFragmentAdapter(private var onListItemClickListener: OnListItemCli
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         return when (viewType) {
             SUN_DEFAULT_VALUE -> {
-                val view = FragmentRecyclerItemSunBinding.inflate(LayoutInflater.from(parent.context))
+                val view =
+                    FragmentRecyclerItemSunBinding.inflate(LayoutInflater.from(parent.context))
                 SunViewHolder(view.root)
             }
 
             EARTH_DEFAULT_VALUE -> {
-                val view = FragmentRecyclerItemEarthBinding.inflate(LayoutInflater.from(parent.context))
+                val view =
+                    FragmentRecyclerItemEarthBinding.inflate(LayoutInflater.from(parent.context))
                 EarthViewHolder(view.root)
             }
 
@@ -71,7 +74,7 @@ class RecyclerFragmentAdapter(private var onListItemClickListener: OnListItemCli
         return list.size
     }
 
-    class HeaderViewHolder(view: View): BaseViewHolder(view){
+    class HeaderViewHolder(view: View) : BaseViewHolder(view) {
         override fun bindAttribute(data: Data) {
             (FragmentRecyclerItemHeaderBinding.bind(itemView)).apply {
                 header.text = data.someText
@@ -80,24 +83,43 @@ class RecyclerFragmentAdapter(private var onListItemClickListener: OnListItemCli
 
     }
 
-    inner class SunViewHolder(view: View) :BaseViewHolder(view) {
-        override fun bindAttribute(data:Data){
-            (FragmentRecyclerItemEarthBinding.bind(itemView)).apply {
-                title.text =data.someText
+    inner class SunViewHolder(view: View) : BaseViewHolder(view) {
+        override fun bindAttribute(data: Data) {
+            (FragmentRecyclerItemSunBinding.bind(itemView)).apply {
+                title.text = data.someText
                 descriptionTextView.text = data.someDescription
                 addItemImageView.setOnClickListener {
                     onListItemClickListener.onAddBtnClick(data, layoutPosition)
                 }
+
                 removeItemImageView.setOnClickListener {
                     onListItemClickListener.onRemoveBtnClick(layoutPosition)
+                }
+
+                moveItemUp.setOnClickListener {
+                    if (layoutPosition != 1) {
+                        list.removeAt(layoutPosition).apply {
+                            list.add(layoutPosition - 1, this)
+                        }
+                        notifyItemMoved(layoutPosition, layoutPosition - 1)
+                    }
+                }
+                moveItemDown.setOnClickListener {
+                    if (layoutPosition != list.size-1) {
+                        list.removeAt(layoutPosition).apply {
+                            list.add(layoutPosition + 1, this)
+                        }
+                        notifyItemMoved(layoutPosition, layoutPosition + 1)
+                    }
                 }
             }
         }
     }
-    inner class EarthViewHolder(view: View) :BaseViewHolder(view) {
-        override fun bindAttribute(data:Data){
+
+    inner class EarthViewHolder(view: View) : BaseViewHolder(view) {
+        override fun bindAttribute(data: Data) {
             (FragmentRecyclerItemEarthBinding.bind(itemView)).apply {
-                title.text =data.someText
+                title.text = data.someText
                 descriptionTextView.text = data.someDescription
                 addItemImageView.setOnClickListener {
                     onListItemClickListener.onAddBtnClick(data, layoutPosition)
@@ -110,9 +132,9 @@ class RecyclerFragmentAdapter(private var onListItemClickListener: OnListItemCli
     }
 
     inner class MarsViewHolder(view: View) : BaseViewHolder(view) {
-        override fun bindAttribute(data:Data){
+        override fun bindAttribute(data: Data) {
             (FragmentRecyclerItemMarsBinding.bind(itemView)).apply {
-                title.text =data.someText
+                title.text = data.someText
                 descriptionTextView.text = data.someDescription
                 addItemImageView.setOnClickListener {
                     onListItemClickListener.onAddBtnClick(data, layoutPosition)
@@ -120,8 +142,23 @@ class RecyclerFragmentAdapter(private var onListItemClickListener: OnListItemCli
                 removeItemImageView.setOnClickListener {
                     onListItemClickListener.onRemoveBtnClick(layoutPosition)
                 }
+                moveItemUp.setOnClickListener {
+                    if (layoutPosition != 1) {
+                        list.removeAt(layoutPosition).apply {
+                            list.add(layoutPosition - 1, this)
+                        }
+                            notifyItemMoved(layoutPosition, layoutPosition - 1)
+                    }
+                }
+                moveItemDown.setOnClickListener {
+                    if (layoutPosition != list.size-1) {
+                        list.removeAt(layoutPosition).apply {
+                            list.add(layoutPosition + 1, this)
+                        }
+                        notifyItemMoved(layoutPosition, layoutPosition + 1)
+                    }
+                }
             }
         }
     }
-
 }
