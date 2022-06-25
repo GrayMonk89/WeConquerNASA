@@ -19,7 +19,7 @@ class RecyclerFragment : Fragment(), OnListItemClickListener {
         get() = _binding!!
 
 
-    private val list = arrayListOf(
+    private val list = mutableListOf(
         Data(HEADER_DEFAULT_NAME, EMPTY_DEFAULT_DESCRIPTION, HEADER_DEFAULT_VALUE),
         Data(SUN_DEFAULT_NAME, SUN_DEFAULT_DESCRIPTION, SUN_DEFAULT_VALUE),
         Data(EARTH_DEFAULT_NAME, EARTH_DEFAULT_DESCRIPTION, EARTH_DEFAULT_VALUE),
@@ -86,5 +86,23 @@ class RecyclerFragment : Fragment(), OnListItemClickListener {
     override fun onRemoveBtnClick(position: Int) {
         list.removeAt(position)
         adapter.setRemoveToList(list, position)
+    }
+
+    override fun moveItemUp(position: Int) {
+        if (position != 1) {
+            list.removeAt(position).apply {
+                list.add(position - 1, this)
+            }
+            adapter.notifyItemMoved(position, position - 1)
+        }
+    }
+
+    override fun moveItemDown(position: Int) {
+        if (position != list.size-1) {
+            list.removeAt(position).apply {
+                list.add(position + 1, this)
+            }
+            adapter.notifyItemMoved(position, position + 1)
+        }
     }
 }

@@ -143,20 +143,10 @@ class RecyclerFragmentAdapter(private var onListItemClickListener: OnListItemCli
                     onListItemClickListener.onRemoveBtnClick(layoutPosition)
                 }
                 moveItemUp.setOnClickListener {
-                    if (layoutPosition != 1) {
-                        list.removeAt(layoutPosition).apply {
-                            list.add(layoutPosition - 1, this)
-                        }
-                            notifyItemMoved(layoutPosition, layoutPosition - 1)
-                    }
+                    onListItemClickListener.moveItemUp(layoutPosition)
                 }
                 moveItemDown.setOnClickListener {
-                    if (layoutPosition != list.size-1) {
-                        list.removeAt(layoutPosition).apply {
-                            list.add(layoutPosition + 1, this)
-                        }
-                        notifyItemMoved(layoutPosition, layoutPosition + 1)
-                    }
+                    onListItemClickListener.moveItemDown(layoutPosition)
                 }
             }
         }
