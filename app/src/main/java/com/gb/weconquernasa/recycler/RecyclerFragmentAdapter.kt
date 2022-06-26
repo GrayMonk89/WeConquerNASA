@@ -6,10 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.gb.weconquernasa.R
 import com.gb.weconquernasa.databinding.*
+import com.gb.weconquernasa.recycler.recycler_interface.ItemTouchHelperAdapter
+import com.gb.weconquernasa.recycler.recycler_interface.OnListItemClickListener
 import com.gb.weconquernasa.utils.*
 
 class RecyclerFragmentAdapter(private var onListItemClickListener: OnListItemClickListener) :
-    RecyclerView.Adapter<BaseViewHolder>() {
+    RecyclerView.Adapter<BaseViewHolder>(), ItemTouchHelperAdapter {
 
     private lateinit var list: MutableList<Pair<Data, Boolean>>
 
@@ -161,5 +163,13 @@ class RecyclerFragmentAdapter(private var onListItemClickListener: OnListItemCli
                 }
             }
         }
+    }
+
+    override fun onItemMove(fromPosition: Int, toPosition: Int) {
+        onListItemClickListener.onItemMove(fromPosition,toPosition)
+    }
+
+    override fun omItemDismiss(position: Int) {
+        onListItemClickListener.omItemDismiss(position)
     }
 }

@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ItemTouchHelper
 import com.gb.weconquernasa.databinding.FragmentRecyclerBinding
+import com.gb.weconquernasa.recycler.recycler_interface.OnListItemClickListener
 import com.gb.weconquernasa.utils.*
 
 class RecyclerFragment : Fragment(), OnListItemClickListener {
@@ -17,7 +19,7 @@ class RecyclerFragment : Fragment(), OnListItemClickListener {
         get() = _binding!!
 
 
-    private val list = mutableListOf(
+    private val list = arrayListOf(
         Pair(Data(HEADER_DEFAULT_NAME, EMPTY_DEFAULT_DESCRIPTION, HEADER_DEFAULT_VALUE), false),
         Pair(Data(SUN_DEFAULT_NAME, SUN_DEFAULT_DESCRIPTION, SUN_DEFAULT_VALUE), false),
         Pair(Data(EARTH_DEFAULT_NAME, EARTH_DEFAULT_DESCRIPTION, EARTH_DEFAULT_VALUE), false),
@@ -49,6 +51,7 @@ class RecyclerFragment : Fragment(), OnListItemClickListener {
         adapter = RecyclerFragmentAdapter(this)
         adapter.setList(list)
         binding.recyclerView.adapter = adapter
+        ItemTouchHelper(ItemTouchHelperCallback(adapter)).attachToRecyclerView(binding.recyclerView)
     }
 
     override fun onDestroy() {
@@ -102,5 +105,19 @@ class RecyclerFragment : Fragment(), OnListItemClickListener {
             }
             adapter.notifyItemMoved(position, position + 1)
         }
+    }
+
+    override fun onItemMove(fromPosition: Int, toPosition: Int) {
+        if (toPosition >= 1) {
+            list.removeAt(fromPosition).apply {
+                list.add(toPosition, this)
+            }
+            adapter.notifyItemMoved(fromPosition, toPosition)
+        }
+    }
+
+    override fun omItemDismiss(position: Int) {
+        list.removeAt(position)
+        adapter.notifyItemRemoved(position)
     }
 }
