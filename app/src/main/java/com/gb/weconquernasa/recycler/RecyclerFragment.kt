@@ -108,7 +108,7 @@ class RecyclerFragment : Fragment(), OnListItemClickListener {
     }
 
     override fun onItemMove(fromPosition: Int, toPosition: Int) {
-        if (toPosition >= 1) {
+        if (toPosition >= 1 && fromPosition != 0) {
             list.removeAt(fromPosition).apply {
                 list.add(toPosition, this)
             }

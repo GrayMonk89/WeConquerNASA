@@ -1,5 +1,6 @@
 package com.gb.weconquernasa.recycler
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.gb.weconquernasa.R
 import com.gb.weconquernasa.databinding.*
 import com.gb.weconquernasa.recycler.recycler_interface.ItemTouchHelperAdapter
+import com.gb.weconquernasa.recycler.recycler_interface.ItemTouchHelperViewHolder
 import com.gb.weconquernasa.recycler.recycler_interface.OnListItemClickListener
 import com.gb.weconquernasa.utils.*
 
@@ -82,7 +84,7 @@ class RecyclerFragmentAdapter(private var onListItemClickListener: OnListItemCli
         }
     }
 
-    inner class SunViewHolder(view: View) : BaseViewHolder(view) {
+    inner class SunViewHolder(view: View) : BaseViewHolder(view), ItemTouchHelperViewHolder {
         override fun bindAttribute(data: Pair<Data, Boolean>) {
             (FragmentRecyclerItemSunBinding.bind(itemView)).apply {
                 title.text = data.first.someText
@@ -120,9 +122,16 @@ class RecyclerFragmentAdapter(private var onListItemClickListener: OnListItemCli
                 }
             }
         }
+        override fun onItemSelected() {
+            itemView.setBackgroundColor(Color.LTGRAY)
+        }
+
+        override fun onItemClear() {
+            itemView.setBackgroundColor(0)
+        }
     }
 
-    inner class EarthViewHolder(view: View) : BaseViewHolder(view) {
+    inner class EarthViewHolder(view: View) : BaseViewHolder(view), ItemTouchHelperViewHolder {
         override fun bindAttribute(data: Pair<Data, Boolean>) {
             (FragmentRecyclerItemEarthBinding.bind(itemView)).apply {
                 title.text = data.first.someText
@@ -135,9 +144,17 @@ class RecyclerFragmentAdapter(private var onListItemClickListener: OnListItemCli
                 }
             }
         }
+
+        override fun onItemSelected() {
+            itemView.setBackgroundColor(Color.LTGRAY)
+        }
+
+        override fun onItemClear() {
+            itemView.setBackgroundColor(0)
+        }
     }
 
-    inner class MarsViewHolder(view: View) : BaseViewHolder(view) {
+    inner class MarsViewHolder(view: View) : BaseViewHolder(view), ItemTouchHelperViewHolder {
         override fun bindAttribute(data: Pair<Data, Boolean>) {
             (FragmentRecyclerItemMarsBinding.bind(itemView)).apply {
                 title.text = data.first.someText
@@ -162,6 +179,14 @@ class RecyclerFragmentAdapter(private var onListItemClickListener: OnListItemCli
                     marsDescriptionTextView.visibility = if(list[layoutPosition].second) View.VISIBLE else View.GONE
                 }
             }
+        }
+
+        override fun onItemSelected() {
+            itemView.setBackgroundColor(Color.LTGRAY)
+        }
+
+        override fun onItemClear() {
+            itemView.setBackgroundColor(0)
         }
     }
 
