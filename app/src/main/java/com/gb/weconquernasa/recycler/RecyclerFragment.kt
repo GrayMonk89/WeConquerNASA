@@ -12,6 +12,7 @@ import com.gb.weconquernasa.utils.*
 
 class RecyclerFragment : Fragment(), OnListItemClickListener {
 
+    private var isNewList = false
 
     private lateinit var adapter: RecyclerFragmentAdapter
     private var _binding: FragmentRecyclerBinding? = null
@@ -48,7 +49,39 @@ class RecyclerFragment : Fragment(), OnListItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.recyclerActivityDiffUtilFAB.setOnClickListener {
+            changeAdapterData()
+        }
+
         setAdapter()
+    }
+
+    private fun changeAdapterData() {
+        adapter.setList(createItemList(isNewList).map { it })
+        isNewList = !isNewList
+    }
+
+    private fun createItemList(instanceNumber: Boolean): List<Pair<Data, Boolean>> {
+        return when (instanceNumber) {
+            false -> listOf(
+                Pair(Data(0, "Header"), false),
+                Pair(Data(1, "Mars", ""), false),
+                Pair(Data(2, "Mars", ""), false),
+                Pair(Data(3, "Mars", ""), false),
+                Pair(Data(4, "Mars", ""), false),
+                Pair(Data(5, "Mars", ""), false),
+                Pair(Data(6, "Mars", ""), false)
+            )
+            true -> listOf(
+                Pair(Data(0, "Header"), false),
+                Pair(Data(1, "Mars", ""), false),
+                Pair(Data(2, "Jupiter", ""), false),
+                Pair(Data(3, "Mars", ""), false),
+                Pair(Data(4, "Neptune", ""), false),
+                Pair(Data(5, "Saturn", ""), false),
+                Pair(Data(6, "Mars", ""), false)
+            )
+        }
     }
 
     private fun setAdapter() {

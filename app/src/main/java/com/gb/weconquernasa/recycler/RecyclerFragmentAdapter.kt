@@ -25,6 +25,7 @@ class RecyclerFragmentAdapter(private var list: MutableList<Pair<Data, Boolean>>
 
         DiffUtil.calculateDiff(DiffUtilCallback(list,newList)).dispatchUpdatesTo(this)
         this.list = newList.toMutableList()
+
     }
 
     fun setAddToList(newList: List<Pair<Data, Boolean>>, position: Int) {
