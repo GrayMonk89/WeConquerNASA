@@ -4,6 +4,8 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.gb.weconquernasa.R
 import com.gb.weconquernasa.databinding.*
@@ -12,17 +14,21 @@ import com.gb.weconquernasa.recycler.recycler_interface.ItemTouchHelperViewHolde
 import com.gb.weconquernasa.recycler.recycler_interface.OnListItemClickListener
 import com.gb.weconquernasa.utils.*
 
-class RecyclerFragmentAdapter(private var onListItemClickListener: OnListItemClickListener) :
+class RecyclerFragmentAdapter(private var list: MutableList<Pair<Data, Boolean>>,private var onListItemClickListener: OnListItemClickListener) :
     RecyclerView.Adapter<BaseViewHolder>(), ItemTouchHelperAdapter {
 
-    private lateinit var list: MutableList<Pair<Data, Boolean>>
 
-    fun setList(newList: MutableList<Pair<Data, Boolean>>) {
-        this.list = newList
+
+    fun setList(newList: List<Pair<Data, Boolean>>) {
+//        val result = DiffUtil.calculateDiff(DiffUtilCallback(list,newList))
+//        result.dispatchUpdatesTo(this)
+
+        DiffUtil.calculateDiff(DiffUtilCallback(list,newList)).dispatchUpdatesTo(this)
+        this.list = newList.toMutableList()
     }
 
-    fun setAddToList(newList: MutableList<Pair<Data, Boolean>>, position: Int) {
-        this.list = newList
+    fun setAddToList(newList: List<Pair<Data, Boolean>>, position: Int) {
+        this.list = newList.toMutableList()
         notifyItemChanged(position)
     }
 
@@ -68,6 +74,22 @@ class RecyclerFragmentAdapter(private var onListItemClickListener: OnListItemCli
         }
     }
 
+    override fun onBindViewHolder(
+        holder: BaseViewHolder,
+        position: Int,
+        payloads: MutableList<Any>
+    ) {
+
+        if(payloads.isEmpty()){
+            super.onBindViewHolder(holder, position, payloads)
+        } else {
+            val res = createCombinedPayload(payloads as List<Change<Pair<Data, Boolean>>>)
+            if(res.oldData.first.someText!=res.newData.first.someText)
+            holder.itemView.findViewById<TextView>(R.id.title).text = res.newData.first.someText
+        }
+
+    }
+
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         holder.bindAttribute(list[position])
     }
@@ -98,20 +120,22 @@ class RecyclerFragmentAdapter(private var onListItemClickListener: OnListItemCli
                 }
 
                 moveItemUp.setOnClickListener {
-                    if (layoutPosition != 1) {
-                        list.removeAt(layoutPosition).apply {
-                            list.add(layoutPosition - 1, this)
-                        }
-                        notifyItemMoved(layoutPosition, layoutPosition - 1)
-                    }
+                    onListItemClickListener.moveItemUp(layoutPosition)
+//                    if (layoutPosition != 1) {
+//                        list.removeAt(layoutPosition).apply {
+//                            list.add(layoutPosition - 1, this)
+//                        }
+//                        notifyItemMoved(layoutPosition, layoutPosition - 1)
+//                    }
                 }
                 moveItemDown.setOnClickListener {
-                    if (layoutPosition != list.size-1) {
-                        list.removeAt(layoutPosition).apply {
-                            list.add(layoutPosition + 1, this)
-                        }
-                        notifyItemMoved(layoutPosition, layoutPosition + 1)
-                    }
+                    onListItemClickListener.moveItemDown(layoutPosition)
+//                    if (layoutPosition != list.size-1) {
+//                        list.removeAt(layoutPosition).apply {
+//                            list.add(layoutPosition + 1, this)
+//                        }
+//                        notifyItemMoved(layoutPosition, layoutPosition + 1)
+//                    }
                 }
                 sunImageView.setOnClickListener { it ->
                     list[layoutPosition] = list[layoutPosition].let {

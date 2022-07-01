@@ -19,18 +19,18 @@ class RecyclerFragment : Fragment(), OnListItemClickListener {
         get() = _binding!!
 
 
-    private val list = arrayListOf(
-        Pair(Data(HEADER_DEFAULT_NAME, EMPTY_DEFAULT_DESCRIPTION, HEADER_DEFAULT_VALUE), false),
-        Pair(Data(SUN_DEFAULT_NAME, SUN_DEFAULT_DESCRIPTION, SUN_DEFAULT_VALUE), false),
-        Pair(Data(EARTH_DEFAULT_NAME, EARTH_DEFAULT_DESCRIPTION, EARTH_DEFAULT_VALUE), false),
-        Pair(Data(SUN_DEFAULT_NAME, SUN_DEFAULT_DESCRIPTION, SUN_DEFAULT_VALUE), false),
-        Pair(Data(EARTH_DEFAULT_NAME, EARTH_DEFAULT_DESCRIPTION, EARTH_DEFAULT_VALUE), false),
-        Pair(Data(EARTH_DEFAULT_NAME, EARTH_DEFAULT_DESCRIPTION, EARTH_DEFAULT_VALUE), false),
-        Pair(Data(MARS_DEFAULT_NAME, MARS_DEFAULT_DESCRIPTION, MARS_DEFAULT_VALUE), false),
-        Pair(Data(EARTH_DEFAULT_NAME, EARTH_DEFAULT_DESCRIPTION, EARTH_DEFAULT_VALUE), false),
-        Pair(Data(SUN_DEFAULT_NAME, SUN_DEFAULT_DESCRIPTION, SUN_DEFAULT_VALUE), false),
-        Pair(Data(EARTH_DEFAULT_NAME, EARTH_DEFAULT_DESCRIPTION, EARTH_DEFAULT_VALUE), false),
-        Pair(Data(MARS_DEFAULT_NAME, EARTH_DEFAULT_DESCRIPTION, MARS_DEFAULT_VALUE), false)
+    private val list = mutableListOf(
+        Pair(Data(0,HEADER_DEFAULT_NAME, EMPTY_DEFAULT_DESCRIPTION, HEADER_DEFAULT_VALUE), false),
+        Pair(Data(1,SUN_DEFAULT_NAME, SUN_DEFAULT_DESCRIPTION, SUN_DEFAULT_VALUE), false),
+        Pair(Data(2,EARTH_DEFAULT_NAME, EARTH_DEFAULT_DESCRIPTION, EARTH_DEFAULT_VALUE), false),
+        Pair(Data(3,SUN_DEFAULT_NAME, SUN_DEFAULT_DESCRIPTION, SUN_DEFAULT_VALUE), false),
+        Pair(Data(4,EARTH_DEFAULT_NAME, EARTH_DEFAULT_DESCRIPTION, EARTH_DEFAULT_VALUE), false),
+        Pair(Data(5,EARTH_DEFAULT_NAME, EARTH_DEFAULT_DESCRIPTION, EARTH_DEFAULT_VALUE), false),
+        Pair(Data(6,MARS_DEFAULT_NAME, MARS_DEFAULT_DESCRIPTION, MARS_DEFAULT_VALUE), false),
+        Pair(Data(7,EARTH_DEFAULT_NAME, EARTH_DEFAULT_DESCRIPTION, EARTH_DEFAULT_VALUE), false),
+        Pair(Data(8,SUN_DEFAULT_NAME, SUN_DEFAULT_DESCRIPTION, SUN_DEFAULT_VALUE), false),
+        Pair(Data(9,EARTH_DEFAULT_NAME, EARTH_DEFAULT_DESCRIPTION, EARTH_DEFAULT_VALUE), false),
+        Pair(Data(10,MARS_DEFAULT_NAME, EARTH_DEFAULT_DESCRIPTION, MARS_DEFAULT_VALUE), false)
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,7 +48,11 @@ class RecyclerFragment : Fragment(), OnListItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = RecyclerFragmentAdapter(this)
+        setAdapter()
+    }
+
+    private fun setAdapter() {
+        adapter = RecyclerFragmentAdapter(list, this)
         adapter.setList(list)
         binding.recyclerView.adapter = adapter
         ItemTouchHelper(ItemTouchHelperCallback(adapter)).attachToRecyclerView(binding.recyclerView)
@@ -72,13 +76,13 @@ class RecyclerFragment : Fragment(), OnListItemClickListener {
 
         when (data.first.type) {
             SUN_DEFAULT_VALUE -> {
-                list.add(position, Pair(Data("Sun", "Sun des", SUN_DEFAULT_VALUE), false))
+                list.add(position, Pair(Data(list.size+1,"Sun", "Sun des", SUN_DEFAULT_VALUE), false))
             }
             EARTH_DEFAULT_VALUE -> {
-                list.add(position, Pair(Data("Earth", "Earth des", EARTH_DEFAULT_VALUE),false))
+                list.add(position, Pair(Data(list.size+1,"Earth", "Earth des", EARTH_DEFAULT_VALUE),false))
             }
             MARS_DEFAULT_VALUE -> {
-                list.add(position, Pair(Data("Mars", "Mars des", MARS_DEFAULT_VALUE),false))
+                list.add(position, Pair(Data(list.size+1,"Mars", "Mars des", MARS_DEFAULT_VALUE),false))
             }
         }
         adapter.setAddToList(list, position)
@@ -103,7 +107,9 @@ class RecyclerFragment : Fragment(), OnListItemClickListener {
             list.removeAt(position).apply {
                 list.add(position + 1, this)
             }
+            //adapter.setList(list)
             adapter.notifyItemMoved(position, position + 1)
+
         }
     }
 
@@ -113,6 +119,7 @@ class RecyclerFragment : Fragment(), OnListItemClickListener {
                 list.add(toPosition, this)
             }
             adapter.notifyItemMoved(fromPosition, toPosition)
+            //setAdapter()
         }
     }
 
