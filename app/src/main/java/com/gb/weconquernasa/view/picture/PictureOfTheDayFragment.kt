@@ -1,6 +1,7 @@
 package com.gb.weconquernasa.view.picture
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -193,6 +194,9 @@ class PictureOfTheDayFragment : Fragment() {
                     crossfade(true)
                     placeholder(R.drawable.load)
                 }
+                binding.lifeHackBehavior.title.typeface = Typeface.createFromAsset(requireActivity().assets,"myfont/SyakeDemo.ttf")
+                binding.lifeHackBehavior.title.textSize = 25F
+                binding.lifeHackBehavior.explanation.textSize = 25f
                 binding.lifeHackBehavior.title.text =
                     pictureOfTheDayAppState.pictureOfTheDayResponseData.title
                 binding.lifeHackBehavior.explanation.text =

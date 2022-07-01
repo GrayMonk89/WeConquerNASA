@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
                 else -> true
             }
         }
-        binding.bottomNavigation.selectedItemId = R.id.actionBottomNavigationRecycler
+        binding.bottomNavigation.selectedItemId = R.id.actionBottomNavigationConstraint
     }
 
     private fun navigationTo(f: Fragment) {

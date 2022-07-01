@@ -2,5 +2,7 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/kranky</item>
+        <item>@font/roboto_condensed_bold_italic</item>
+        <item>@font/uncial_antiqua</item>
     </array>
 </resources>
