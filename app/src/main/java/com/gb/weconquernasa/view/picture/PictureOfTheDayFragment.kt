@@ -3,7 +3,13 @@ package com.gb.weconquernasa.view.picture
 import android.content.Intent
 import android.graphics.Typeface
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.SpannableStringBuilder
+import android.text.SpannedString
+import android.text.style.BulletSpan
+import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -135,7 +141,7 @@ class PictureOfTheDayFragment : Fragment() {
     private fun initSheetBehavior() {
         val bottomSheetBehavior =
             BottomSheetBehavior.from(binding.lifeHackBehavior.bottomSheetContainer)
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         bottomSheetBehavior.addBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
@@ -152,7 +158,7 @@ class PictureOfTheDayFragment : Fragment() {
             }
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                Log.d(LOG_KEY, "$slideOffset")
+                //Log.d(LOG_KEY, "$slideOffset")
             }
 
         })
@@ -194,7 +200,8 @@ class PictureOfTheDayFragment : Fragment() {
                     crossfade(true)
                     placeholder(R.drawable.load)
                 }
-                binding.lifeHackBehavior.title.typeface = Typeface.createFromAsset(requireActivity().assets,"myfont/SyakeDemo.ttf")
+                binding.lifeHackBehavior.title.typeface =
+                    Typeface.createFromAsset(requireActivity().assets, "myfont/SyakeDemo.ttf")
                 binding.lifeHackBehavior.title.textSize = 25F
                 binding.lifeHackBehavior.explanation.textSize = 25f
                 binding.lifeHackBehavior.title.text =
@@ -202,8 +209,120 @@ class PictureOfTheDayFragment : Fragment() {
                 binding.lifeHackBehavior.explanation.text =
                     pictureOfTheDayAppState.pictureOfTheDayResponseData.explanation
 
+                workWithSpan()
+
             }
         }
+    }
+
+    private fun workWithSpan() {
+
+
+        val textSpannable = "Most brilliant text \nparagraph one \nparagraph two \nparagraph three \n" +
+                "paragraph three \n" +
+                "paragraph three \n" +
+                "paragraph three \n" +
+                "paragraph three"
+//        Log.d(LOG_KEY, "{${textSpannable.length}}")
+//        val split = textSpannable.split("\n").toMutableList()
+//        Log.d(LOG_KEY, "split + ${split.size}")
+//        repeat(split.size) {
+//            if (it > 0)
+//                split[it] = "\n${split[it]}"
+//        }
+//        split.forEach { Log.d(LOG_KEY, "$it + ${it.length}") }
+
+        fun glue(s: String): List<Int> {
+            val splitS: MutableList<String> = s.split("\n") as MutableList<String>
+            val lengthList = mutableListOf<Int>()
+            repeat(splitS.size) {if (it > 0)
+                splitS[it] = "\n${splitS[it]}"}
+            repeat(splitS.size) {
+                if(it == 0){
+                    lengthList.add(splitS[it].length)
+                } else if (it < splitS.size){
+                    lengthList.add(lengthList[it-1] + splitS[it].length)
+                }
+            }
+
+            return lengthList
+        }
+
+        val lengthList = glue(textSpannable)
+
+        Log.d(LOG_KEY, glue(textSpannable).toString())
+
+
+
+        val spannedString: SpannedString
+        val spannableString: SpannableString = SpannableString(textSpannable)
+        val spannableStringBuilder: SpannableStringBuilder
+
+        fun setBulletSpan(lengthList: List<Int>){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                for(i in lengthList.indices){
+                    if(i<lengthList.size-1)
+                    spannableString.setSpan(
+                        BulletSpan(20, ContextCompat.getColor(requireContext(), R.color.my_color_5), 10),
+                        lengthList[i] + 1,
+                        lengthList[i+1],
+                        SpannedString.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
+                }
+
+            }
+        }
+
+        fun setForegroundColorSpan(lengthList: List<Int>){
+            for(i in lengthList.indices){
+                if(i<lengthList.lastIndex)
+                    spannableString.setSpan(
+                        ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.red_700)),
+                        lengthList[i] + 1,
+                        lengthList[i+1], SpannedString.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
+            }
+        }
+
+        setBulletSpan(lengthList)
+        setForegroundColorSpan(lengthList)
+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+//            spannableString.setSpan(
+//                BulletSpan(20, ContextCompat.getColor(requireContext(), R.color.my_color_5), 10),
+//                split[0].length + 1,
+//                split[0].length + split[1].length,
+//                SpannedString.SPAN_EXCLUSIVE_EXCLUSIVE
+//            )
+//            spannableString.setSpan(
+//                BulletSpan(20, ContextCompat.getColor(requireContext(), R.color.my_color_5), 10),
+//                split[0].length + split[1].length + 1, split[0].length + split[1].length + split[2].length, SpannedString.SPAN_EXCLUSIVE_EXCLUSIVE
+//            )
+//            spannableString.setSpan(
+//                BulletSpan(20, ContextCompat.getColor(requireContext(), R.color.my_color_5), 10),
+//                split[0].length + split[1].length + split[2].length + 1, textSpannable.length, SpannedString.SPAN_EXCLUSIVE_EXCLUSIVE
+//            )
+//        } else {
+//            spannableString.setSpan(
+//                BulletSpan(20, ContextCompat.getColor(requireContext(), R.color.my_color_5)),
+//                20, spannableString.length, SpannedString.SPAN_EXCLUSIVE_EXCLUSIVE
+//            )
+//        }
+//        spannableString.setSpan(
+//            ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.red_700)),
+//            lengthList[0],
+//            lengthList[0] + lengthList[1], SpannedString.SPAN_EXCLUSIVE_EXCLUSIVE
+//        )
+//        spannableString.setSpan(
+//            ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.my_color_5)),
+//            lengthList[0] + lengthList[1], spannableString.length, SpannedString.SPAN_EXCLUSIVE_EXCLUSIVE
+//        )
+//        spannableString.setSpan(
+//            ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.blue)),
+//            lengthList[0] + lengthList[1] + lengthList[2], spannableString.length, SpannedString.SPAN_EXCLUSIVE_EXCLUSIVE
+//        )
+//
+        binding.lifeHackBehavior.explanation.text = spannableString
     }
 
     companion object {
