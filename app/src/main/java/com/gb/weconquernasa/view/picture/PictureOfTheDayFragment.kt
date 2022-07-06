@@ -8,8 +8,8 @@ import android.os.Bundle
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.text.SpannedString
-import android.text.style.BulletSpan
-import android.text.style.ForegroundColorSpan
+import android.text.method.LinkMovementMethod
+import android.text.style.*
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -202,8 +202,8 @@ class PictureOfTheDayFragment : Fragment() {
                 }
                 binding.lifeHackBehavior.title.typeface =
                     Typeface.createFromAsset(requireActivity().assets, "myfont/SyakeDemo.ttf")
-                binding.lifeHackBehavior.title.textSize = 25F
-                binding.lifeHackBehavior.explanation.textSize = 25f
+                //binding.lifeHackBehavior.title.textSize = 25F
+                //binding.lifeHackBehavior.explanation.textSize = 25f
                 binding.lifeHackBehavior.title.text =
                     pictureOfTheDayAppState.pictureOfTheDayResponseData.title
                 binding.lifeHackBehavior.explanation.text =
@@ -217,26 +217,62 @@ class PictureOfTheDayFragment : Fragment() {
 
     private fun workWithSpan() {
 
-
+        val textTitle = binding.lifeHackBehavior.title.text
+        binding.lifeHackBehavior.explanation.text
         val textSpannable = "Most brilliant text \nparagraph one \nparagraph two \nparagraph three \nparagraph three \nparagraph three \nparagraph three \nparagraph three"
+        val largeText = getText(R.string.large_text)
+        val lengthList = lengthList(largeText.toString())
 
-        val lengthList = lengthList(textSpannable)
-
-        Log.d(LOG_KEY, lengthList(textSpannable).toString())
+        //Log.d(LOG_KEY, lengthList(textSpannable).toString())
 
 
 
         val spannedString: SpannedString
-        val spannableString: SpannableString = SpannableString(textSpannable)
-        val spannableStringBuilder: SpannableStringBuilder
+        val spannableTitle = SpannableString(binding.lifeHackBehavior.title.text)
+        val spannableString: SpannableString = SpannableString(binding.lifeHackBehavior.explanation.text)
+        val spannableStringBuilder: SpannableStringBuilder = SpannableStringBuilder(binding.lifeHackBehavior.explanation.text)
+
+        spannableTitle.setSpan(RelativeSizeSpan(2f),0,spannableTitle.length, SpannedString.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+        spannableStringBuilder.setSpan(RelativeSizeSpan(2f),0,spannableStringBuilder.length, SpannedString.SPAN_EXCLUSIVE_EXCLUSIVE)
+        setForegroundColorSpanFromTo(spannableStringBuilder,R.color.my_color_2,9,25,SpannedString.SPAN_EXCLUSIVE_EXCLUSIVE)
+        setLineBackgroundSpan(spannableStringBuilder,R.color.my_color_5,0,5,0)
+        setLineBackgroundSpan(spannableStringBuilder,R.color.my_color_5,60,70,0)
+        setLineBackgroundSpan(spannableStringBuilder,R.color.my_color_5,160,170,0)
+        setSuperscriptSpan(spannableStringBuilder, 45, 50)
+        setSubscriptSpan(spannableStringBuilder, 55, 60)
+        spannableStringBuilder.insert(19,"NEW")
+
+        setURLSpan(spannableStringBuilder,"https://www.google.com", 74, 83, 0)
 
 
+        binding.lifeHackBehavior.explanation.movementMethod = LinkMovementMethod.getInstance()
 
-        setBulletSpan(lengthList, spannableString)
-        setForegroundColorSpan(lengthList, spannableString)
+        spannedString = SpannedString(spannableStringBuilder)
+        binding.lifeHackBehavior.title.text = spannableTitle
+        binding.lifeHackBehavior.explanation.text = spannedString
+    }
 
+    private fun setURLSpan(spannableStringBuilder: SpannableStringBuilder,url: String, from: Int, to: Int, flag: Int = 0){
+        spannableStringBuilder.setSpan(URLSpan(url),from,to,flag)
+    }
 
-        binding.lifeHackBehavior.explanation.text = spannableString
+    private fun setSuperscriptSpan(spannableStringBuilder: SpannableStringBuilder, from: Int, to: Int, flag: Int = 0){
+        spannableStringBuilder.setSpan(SuperscriptSpan(), from, to, flag)
+    }
+
+    private fun setSubscriptSpan(spannableStringBuilder: SpannableStringBuilder, from: Int, to: Int, flag: Int = 0){
+        spannableStringBuilder.setSpan(SubscriptSpan(), from, to, flag)
+    }
+
+    private fun setLineBackgroundSpan(spannableStringBuilder: SpannableStringBuilder, color: Int, from: Int, to: Int, flag: Int = 0){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            spannableStringBuilder.setSpan(
+                LineBackgroundSpan.Standard(ContextCompat.getColor(requireContext(), color)),
+                from,
+                to, flag
+            )
+        }
     }
 
     private fun lengthList(s: String): List<Int> {
@@ -258,27 +294,41 @@ class PictureOfTheDayFragment : Fragment() {
     private fun setBulletSpan(lengthList: List<Int>, spannableString: SpannableString){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             for(i in lengthList.indices){
-                if(i<lengthList.size-1)
+                if(i<lengthList.size-1) {
                     spannableString.setSpan(
-                        BulletSpan(20, ContextCompat.getColor(requireContext(), R.color.my_color_5), 10),
+                        BulletSpan(
+                            20,
+                            ContextCompat.getColor(requireContext(), R.color.my_color_5),
+                            10
+                        ),
                         lengthList[i] + 1,
-                        lengthList[i+1],
+                        lengthList[i + 1],
                         SpannedString.SPAN_EXCLUSIVE_EXCLUSIVE
                     )
+                }
             }
 
         }
     }
 
-    private fun setForegroundColorSpan(lengthList: List<Int>, spannableString: SpannableString){
+    private fun setForegroundColorSpanAuto(lengthList: List<Int>, spannableString: SpannableString){
         for(i in lengthList.indices){
-            if(i<lengthList.lastIndex)
+            if(i<lengthList.lastIndex) {
                 spannableString.setSpan(
                     ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.red_700)),
                     lengthList[i] + 1,
-                    lengthList[i+1], SpannedString.SPAN_EXCLUSIVE_EXCLUSIVE
+                    lengthList[i + 1], SpannedString.SPAN_EXCLUSIVE_EXCLUSIVE
                 )
+            }
         }
+    }
+
+    private fun setForegroundColorSpanFromTo(spannableStringBuilder: SpannableStringBuilder,color: Int, from: Int, to: Int, flag: Int){
+        spannableStringBuilder.setSpan(
+            ForegroundColorSpan(ContextCompat.getColor(requireContext(), color)),
+            from,
+            to, flag
+        )
     }
 
     companion object {
