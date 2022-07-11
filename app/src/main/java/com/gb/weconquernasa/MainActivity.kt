@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTheme(R.style.BlueTheme)//getRealStyle(getCurrentTheme())
+        setTheme(getRealStyle(getCurrentTheme()))//R.style.BlueTheme
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         if (savedInstanceState == null) {//PictureOfTheDayFragment.newInstance()

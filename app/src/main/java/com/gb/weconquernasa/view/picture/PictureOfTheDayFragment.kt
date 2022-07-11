@@ -141,7 +141,7 @@ class PictureOfTheDayFragment : Fragment() {
     private fun initSheetBehavior() {
         val bottomSheetBehavior =
             BottomSheetBehavior.from(binding.lifeHackBehavior.bottomSheetContainer)
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         bottomSheetBehavior.addBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
