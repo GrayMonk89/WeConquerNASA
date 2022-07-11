@@ -64,7 +64,4 @@
     <style name="BlueTheme.Splash">
         <item name="android:windowBackground">@drawable/splash_background</item>
     </style>
-
-    <style name="ThemeForDynamicColor" parent="Theme.Material3.DynamicColors.DayNight"/>
-
 </resources>
