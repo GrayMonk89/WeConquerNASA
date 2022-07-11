@@ -12,6 +12,8 @@ import com.gb.weconquernasa.layout.motion.MotionFragment
 import com.gb.weconquernasa.recycler.RecyclerFragment
 import com.gb.weconquernasa.utils.*
 import com.gb.weconquernasa.view.picture.PictureOfTheDayFragment
+import com.gb.weconquernasa.view.ux.ButtonUXFragment
+import com.gb.weconquernasa.view.ux.TextUXFragment
 import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {
@@ -63,12 +65,12 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.actionBottomNavigationMotion -> {
                     binding.fabExit.visibility = View.VISIBLE
-                    navigationTo(MotionFragment())
+                    navigationTo(ButtonUXFragment())
                     true
                 }
                 R.id.actionBottomNavigationAnimations -> {
                     binding.fabExit.visibility = View.VISIBLE
-                    navigationTo(AnimationsFragment())
+                    navigationTo(TextUXFragment())
                     true
                 }
                 R.id.actionBottomNavigationRecycler -> {
@@ -80,7 +82,7 @@ class MainActivity : AppCompatActivity() {
                 else -> true
             }
         }
-        binding.bottomNavigation.selectedItemId = R.id.actionBottomNavigationConstraint
+        binding.bottomNavigation.selectedItemId = R.id.actionBottomNavigationAnimations
     }
 
     private fun navigationTo(f: Fragment) {
