@@ -60,4 +60,8 @@
         <item name="superColorOnPrimary">@color/green_200</item>
         <item name="superColorOnSecondary">@color/green_700</item>
     </style>
+
+    <style name="BlueTheme.Splash">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
 </resources>
