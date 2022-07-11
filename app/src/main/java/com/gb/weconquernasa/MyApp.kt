@@ -3,6 +3,7 @@ package com.gb.weconquernasa
 import android.app.Application
 import com.gb.weconquernasa.repository.PictureOfTheDayAPI
 import com.gb.weconquernasa.utils.NASA_DOMAIN_PART
+import com.google.android.material.color.DynamicColors
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -10,6 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class MyApp: Application() {
     override fun onCreate() {
         super.onCreate()
+        DynamicColors.applyToActivitiesIfAvailable(this)
     }
 
     companion object {
