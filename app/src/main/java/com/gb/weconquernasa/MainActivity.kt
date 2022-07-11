@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity() {
                 else -> true
             }
         }
-        binding.bottomNavigation.selectedItemId = R.id.actionBottomNavigationAnimations
+        binding.bottomNavigation.selectedItemId = R.id.actionBottomNavigationMotion
     }
 
     private fun navigationTo(f: Fragment) {
