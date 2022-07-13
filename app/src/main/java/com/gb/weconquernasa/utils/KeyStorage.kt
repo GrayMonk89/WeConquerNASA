@@ -14,6 +14,8 @@ const val THEME_THREE = 3
 
 const val KEY_SP = "sp"
 const val KEY_CURRENT_THEME = "current_theme"
+const val KEY_TUTORIAL = "Tutorial Key"
+
 
 const val SUN_DEFAULT_VALUE = 0
 const val EARTH_DEFAULT_VALUE = 3
